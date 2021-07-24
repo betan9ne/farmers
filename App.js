@@ -8,6 +8,7 @@ import Tabs from './navigation/tabs'
 import firebase_ from './firebase'
 import profile from './comp/profile/profile';
 import AddProduct from './comp/profile/AddProduct';
+import ManageProducts from './comp/profile/ManageProducts';
 
 const Stack = createStackNavigator();
 
@@ -71,6 +72,7 @@ const App = () => {
                   initialRouteName={'Home'}              >
                   <Stack.Screen name="Home" component={Tabs} />
                   <Stack.Screen name="addProduct" component={AddProduct} options={{headerShown:true, title:"Add Product"}} />
+                  <Stack.Screen name="manageProduct" component={ManageProducts} options={{headerShown:true, title:"My Products"}} />
          
                   
               </Stack.Navigator>

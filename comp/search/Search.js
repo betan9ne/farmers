@@ -14,7 +14,7 @@ function Search() {
              <View style={{padding:SIZES.padding*2, height:120}}>
         <Text style={{...FONTS.h2}}>Search</Text>
         <View>
-            <TextInput placeholder="search for something" onChangeText={(value)=>setSearch(value)} style={{padding: SIZES.padding*2,}} />
+            <TextInput isFocused={true} placeholder="search for something" onChangeText={(value)=>setSearch(value)} style={{padding: SIZES.padding*2,}} />
             </View>
     </View>
             

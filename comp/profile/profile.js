@@ -28,9 +28,9 @@ function profile() {
     </View>
     
     <View style={{flexDirection:"row", marginVertical:5,}}>
-        <View style={{flex:1, marginHorizontal:5, borderRadius:10, justifyContent:"center", alignItems:"center", backgroundColor:COLORS.black}}>
+        <TouchableOpacity  onPress={()=>navigation.navigate("manageProduct")} style={{flex:1, marginHorizontal:5, borderRadius:10, justifyContent:"center", alignItems:"center", backgroundColor:COLORS.black}}>
             <Text style={{color:COLORS.white, ...FONTS.h4, padding:SIZES.padding*4, textAlign:"center", fontWeight:"900"}}><Feather name="check-square" size={24} color="white"/>{"\n\n"}Manage Products</Text>
-        </View> 
+        </TouchableOpacity> 
         <TouchableOpacity onPress={()=>navigation.navigate("addProduct")} style={{flex:1, marginHorizontal:5, borderRadius:10, justifyContent:"center", alignItems:"flex-end", backgroundColor:COLORS.secondary}}>
             <Text style={{color:COLORS.white, ...FONTS.h4, padding:SIZES.padding*4, textAlign:"center", fontWeight:"900"}}><Feather name="plus" size={24} color="white"/>{"\n\n"}Add Product</Text>
         </TouchableOpacity>            
