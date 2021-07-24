@@ -3,9 +3,11 @@ import {Text, View,  TouchableOpacity, TextInput, Button} from 'react-native'
 import firebase from '../../firebase'
 import { SIZES, FONTS, COLORS } from "../../constants"
 import {Feather} from "@expo/vector-icons"
+import {useNavigation} from '@react-navigation/native'
 
 function Search() {
 
+    const navigation = useNavigation()
     const[search, setSearch] = useState(null)
     return (
         <View style={{padding:SIZES.padding,backgroundColor:COLORS.white, height:SIZES.height}}>
@@ -21,6 +23,9 @@ function Search() {
                 <Text style={{...FONTS.h5, textAlign:"center"}}>Search for produce or services of interests in your area.</Text>
                 <TouchableOpacity style={{backgroundColor:COLORS.black, marginVertical:40, borderRadius:40}}>
                     <Text style={{color:COLORS.white, padding:SIZES.padding*2, ...FONTS.h4, paddingHorizontal:40, fontWeight:"900"}}><Feather name="search" size={20} style={{marginHorizontal:10}} color="white" /> Start Searching</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate("addProduct")} style={{backgroundColor:COLORS.black, borderRadius:60, padding:10}}>
+                    <Feather name="plus" size={24} color="white" />
                 </TouchableOpacity>
             </View>
     
