@@ -101,7 +101,7 @@ const Tabs = () => {
         >
             <Tab.Screen
                 name="Home"
-                component={Search}
+                component={Explore}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Feather name="search" size={24}

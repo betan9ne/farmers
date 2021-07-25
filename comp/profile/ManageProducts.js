@@ -10,7 +10,7 @@ function ManageProducts() {
     const navigation = useNavigation()
     const[docs, setDocs] = useState(null)
     useEffect(()=>{
-        firebase.firestore().collection("products").where("u_id", "==", "1").onSnapshot((snap)=>{
+        firebase.firestore().collection("products").where("u_id", "==", "lLXFN6xZAiwol0JEeIJ2").onSnapshot((snap)=>{
             let asd =[]
             snap.docs.forEach(e=>{
                 let sdf ={
@@ -25,7 +25,7 @@ function ManageProducts() {
 console.log(docs)
 
 const renderItem = ({ item }) => (           
-    <TouchableOpacity onPress={()=>navigation.navigate("viewProduce",{item})} style={{paddingVertical:10, borderRadius:10, marginVertical:10, backgroundColor:COLORS.white}}>
+    <TouchableOpacity onPress={()=>navigation.navigate("viewProduct",{item})} style={{paddingVertical:10, borderRadius:10, marginVertical:10, backgroundColor:COLORS.white}}>
         <Text style={{paddingHorizontal:20, ...FONTS.h4, color:COLORS.black}}>{item.produce}</Text>
         <Text style={{paddingHorizontal:20, ...FONTS.h6, color:COLORS.black}}>{item.produce_category}</Text>
         <Text style={{paddingHorizontal:20, ...FONTS.h6, color:COLORS.secondary}}>Price: {item.price}</Text>

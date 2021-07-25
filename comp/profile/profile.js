@@ -8,6 +8,36 @@ import {Feather} from "@expo/vector-icons"
 function profile() {
     const navigation = useNavigation()
     //buyer, farmer, transporter
+
+    function createUsers(){
+        const names = ["Aaran", "Aaren", "Aarez", "Aarman", "Aaron", "Aaron-James", "Aarron", "Aaryan", "Aaryn", "Aayan", "Aazaan", "Abaan", "Abbas", "Abdallah", "Abdalroof", "Abdihakim", "Abdirahman", "Abdisalam", "Abdul", "Abdul-Aziz", "Abdulbasir", "Abdulkadir"]
+        const lastName = ["Abdulkarem", "Abdulkhader", "Abdullah", "Abdul-Majeed", "Abdulmalik", "Abdul-Rehman", "Abdur", "Abdurraheem", "Abdur-Rahman", "Abdur-Rehmaan", "Abel", "Abhinav", "Abhisumant", "Abid", "Abir", "Abraham", "Abu", "Abubakar", "Ace", "Adain", "Adam", "Adam-James", "Addison", "Addisson", "Adegbola", "Adegbolahan", "Aden", "Adenn", "Adie", "Adil", "Aditya", "Adnan", "Adrian", "Adrien", "Aedan", "Aedin", "Aedyn", "Aeron"]
+        const gender = ["Male", "Female"]
+        const us_cities = ["Abbeville", "Abbotsford", "Aberdeen", "Abilene", "Abingdon", "Abington", "Absecon", "Acampo", "Accokeek", "Achille", "Acme", "Acton", "Acushnet", "Acworth", "Ada", "Adair", "Adairsville", "Adams", "Adams Run", "Adamstown", "Adamsville", "Addieville", "Addis", "Addison", "Addyston", "Adel", "Adelanto", "Adena", "Adkins", "Adrian", "Advance", "Afton", "Agawam", "Agoura Hills", "Agra", "'Aiea", "Aiken", "Ailey", "Airville", "Ajo", "Akhiok", "Akron", "Alabaster", "Alameda", "Alamo", "Alamogordo", "Albany", "Albemarle", "Albert City", "Albert Lea", "Albertson", "Albertville", "Albia", "Albion", "Albrightsville", "Albuquerque", "Alburtis", "Alcoa", "Alden", "Aldie", "Aledo", "Alexander", "Alexander City", "Alexandria", "Alfred", "Alger", "Algoma", "Algonquin", "Alhambra", "Alice", "Aliceville", "Aliquippa", "Aliso Viejo", "Allegan", "Allen", "Allendale"]
+        const type = ["Buyer", "Farmer", "Transporter", "Store"]
+        for (let id = 0; id < 5; id++) {
+            const random = Math.floor(Math.random()*gender.length)
+            const randomName = Math.floor(Math.random()*names.length)
+            const randomLastName = Math.floor(Math.random()*lastName.length)
+            const radnomCity = Math.floor(Math.random()*us_cities.length)
+            const randomType = Math.floor(Math.random()*type.length)
+            let asd = {
+                name: names[randomName] +" " + lastName[randomLastName],
+                username: names[randomName] +"_" + lastName[randomLastName] +id,
+                gender: gender[random],
+                district: us_cities[radnomCity],
+                province:'Lusaka',
+                phone:'097831453'+id,
+                type: type[randomType]
+              }
+              firebase.firestore().collection("users").add(asd).then(()=>{
+                  console.log("added")
+              })     
+        }
+
+       
+    }
+
     return (
     <ScrollView style={{padding:SIZES.padding,backgroundColor:COLORS.white, marginBottom:80, height:SIZES.height}}>
         <View style={{padding:SIZES.padding*2, height:60}}>
@@ -38,9 +68,9 @@ function profile() {
     </View>   
     
     <View style={{flexDirection:"row", marginVertical:5,}}>
-        <View style={{flex:1, marginHorizontal:5, borderRadius:10, justifyContent:"center", alignItems:"center", backgroundColor:COLORS.black}}>
+        <TouchableOpacity style={{flex:1, marginHorizontal:5, borderRadius:10, justifyContent:"center", alignItems:"center", backgroundColor:COLORS.black}}>
             <Text style={{color:COLORS.white, ...FONTS.h4, padding:SIZES.padding*4, textAlign:"center", fontWeight:"900"}}><Feather name="user" size={24} color="white"/>{"\n\n"}Update Profile</Text>
-        </View> 
+        </TouchableOpacity> 
         <View style={{flex:1, marginHorizontal:5, borderRadius:10, justifyContent:"center", alignItems:"center", backgroundColor:COLORS.black}}>
             <Text style={{color:COLORS.white, ...FONTS.h4, padding:SIZES.padding*4, textAlign:"center", fontWeight:"900"}}><Feather name="heart" size={24} color="white"/>{"\n\n"}Rate the App</Text>
         </View>            

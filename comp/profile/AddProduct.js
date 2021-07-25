@@ -38,7 +38,7 @@ function AddProduct() {
             price: price,
             items: items,
             delivery: delivery,
-            u_id:"1",
+            u_id:"lLXFN6xZAiwol0JEeIJ2",
         }
         firebase.firestore().collection("products").add(asd).then(()=>{
             console.log("Item added")
