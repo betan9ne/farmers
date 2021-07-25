@@ -11,6 +11,7 @@ import UserProfile from "./comp/explore/UserProfile";
 import ViewProduce from "./comp/explore/ViewProduce";
 import Signin from "./comp/signin/Signin";
 import Signup from "./comp/signin/Signup";
+import Welcome from "./comp/signin/Welcome";
 import Test from "./comp/signin/Test";
 
 const Stack = createStackNavigator();
@@ -51,17 +52,29 @@ const App = () => {
   //   )
   // }
 
-  if(!loggedin){
-      return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="Welcome">
-              {/* <Stack.Screen name="Welcome" component={Welcome} options={{headerShown: false}} /> */}
-              <Stack.Screen name="Register" component={Signup} options={{headerShown: false}} />
-              <Stack.Screen name="Login" component={Test} options={{headerShown: false}} />
-            </Stack.Navigator>
-        </NavigationContainer>
+  if (!loggedin) {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Welcome">
+          <Stack.Screen
+            name="Welcome"
+            component={Welcome}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Signup}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Login"
+            component={Signin}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     );
-      }
+  }
   return (
     <NavigationContainer>
       <Stack.Navigator

@@ -1,6 +1,12 @@
-import React, {useState, useRef} from "react";
-import {TextInput,  StyleSheet,  Text,  View,  TouchableOpacity,} from "react-native";
-import { SIZES, COLORS, FONTS } from '../../constants';
+import React, { useState, useRef } from "react";
+import {
+  TextInput,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from "react-native";
+import { SIZES, COLORS, FONTS } from "../../constants";
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 import firebase from "../../firebase";
 
@@ -11,14 +17,14 @@ function Signin() {
   const [code, setCode] = useState("");
 
   const sendVerification = () => {
-    const phoneProvider = new firebase.auth().PhoneAuthProvider();
+    const phoneProvider = new firebase.auth.PhoneAuthProvider();
     phoneProvider
       .verifyPhoneNumber("+26" + phoneNumber, recaptchaVerifire.current)
       .then(setVerificationId);
   };
 
   const confirmCode = () => {
-    const credential = firebase.auth().PhoneAuthProvider.credential(
+    const credential = firebase.auth.PhoneAuthProvider.credential(
       verificationId,
       code
     );
@@ -46,9 +52,10 @@ function Signin() {
         onChangeText={setPhoneNumber}
       />
 
-      <TouchableOpacity style={styles.buttonLogin_} onPress={sendVerification}><Text style={styles.buttonLoginText}>Get OTP </Text>
+      <TouchableOpacity style={styles.buttonLogin_} onPress={sendVerification}>
+        <Text style={styles.buttonLoginText}>Get OTP </Text>
       </TouchableOpacity>
-    <View style={{height:20}}></View>
+      <View style={{ height: 20 }}></View>
       <TextInput
         // value="OTP"
         keyboardType="number-pad"
@@ -57,7 +64,9 @@ function Signin() {
         onChangeText={setCode}
         style={styles.input}
       />
-      <TouchableOpacity style={styles.buttonLogin} onPress={confirmCode}><Text style={styles.buttonText}>Login</Text></TouchableOpacity>
+      <TouchableOpacity style={styles.buttonLogin} onPress={confirmCode}>
+        <Text style={styles.buttonText}>Login</Text>
+      </TouchableOpacity>
 
       <FirebaseRecaptchaVerifierModal
         ref={recaptchaVerifire}
@@ -69,21 +78,21 @@ function Signin() {
 }
 
 const styles = StyleSheet.create({
-  buttonLoginText:{
-    color:COLORS.black,
-    textAlign:"center",
-    ...FONTS.h5
- },
- buttonLogin_:{
-    backgroundColor:COLORS.white,
-    borderRadius:10,
-     paddingVertical:20,
-     marginVertical:5,
- },
+  buttonLoginText: {
+    color: COLORS.black,
+    textAlign: "center",
+    ...FONTS.h5,
+  },
+  buttonLogin_: {
+    backgroundColor: COLORS.white,
+    borderRadius: 10,
+    paddingVertical: 20,
+    marginVertical: 5,
+  },
   container: {
     flex: 1,
-    backgroundColor:COLORS.white,     
-    padding: SIZES.padding*3,
+    backgroundColor: COLORS.white,
+    padding: SIZES.padding * 3,
     justifyContent: "center",
   },
   titleText: {
@@ -95,26 +104,25 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: "black",
   },
-  buttonText:{
-    color:COLORS.white,
-    textAlign:"center",
-    ...FONTS.h5
+  buttonText: {
+    color: COLORS.white,
+    textAlign: "center",
+    ...FONTS.h5,
   },
-  input: {    
+  input: {
     padding: 10,
     borderRadius: 10,
   },
   button: {
-     padding: 3,
+    padding: 3,
     margin: 3,
     marginTop: 50,
-    
   },
   buttonLogin: {
-    backgroundColor:COLORS.black,
-    borderRadius:10,
-    paddingVertical:20,
-    marginVertical:10,
+    backgroundColor: COLORS.black,
+    borderRadius: 10,
+    paddingVertical: 20,
+    marginVertical: 10,
   },
 });
 export default Signin;

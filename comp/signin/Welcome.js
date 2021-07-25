@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { COLORS, FONTS, SIZES } from "./../../constants";
 
-function Welcome() {
+const Welcome = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {/* <ImageBackground source={image} style={styles.bgimage}> */}
@@ -23,17 +23,23 @@ function Welcome() {
       </Text>
       {/* </ImageBackground> */}
       <View style={styles.miniContainer}>
-        <TouchableOpacity style={styles.button1} onPress={""}>
+        <TouchableOpacity
+          style={styles.button1}
+          onPress={() => navigation.navigate("Register")}
+        >
           <Text style={styles.buttonText}>Sign up</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button2} onPress={""}>
+        <TouchableOpacity
+          style={styles.button2}
+          onPress={() => navigation.navigate("Login")}
+        >
           <Text style={styles.buttonText}>Log in</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
