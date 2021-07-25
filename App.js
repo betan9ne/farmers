@@ -57,7 +57,7 @@ const App = () => {
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Welcome">
               {/* <Stack.Screen name="Welcome" component={Welcome} options={{headerShown: false}} /> */}
-              {/* <Stack.Screen name="Register" component={Signup} options={{headerShown: false}} /> */}
+              <Stack.Screen name="Register" component={Signup} options={{headerShown: false}} />
               <Stack.Screen name="Login" component={Signin} options={{headerShown: false}} />
             </Stack.Navigator>
         </NavigationContainer>
