@@ -1,9 +1,11 @@
 import React,{useState, useEffect} from 'react'
-import {Text, View,  TouchableOpacity, TextInput, FlatList} from 'react-native'
+import {Text, View,  TouchableOpacity, ActivityIndicator, TextInput, Platform, FlatList} from 'react-native'
 import firebase from '../../firebase'
 import { SIZES, FONTS, COLORS } from "../../constants"
 import {useNavigation} from '@react-navigation/native'
 import {Feather} from "@expo/vector-icons"
+import * as ImagePicker from 'expo-image-picker'
+import uuid from "uuid"
 
 function AddProduct() {
     const[price, setPrice]= useState(null)
@@ -13,8 +15,24 @@ function AddProduct() {
     const[subItems, setSubItems] = useState(null)
     const[subItem, setSubItem] = useState(null)
     const[ItemName, setItemname] = useState(null)
+    const[url, setUrl] = useState(null)
+
+    const [image, setImage] = useState(null);
+    const [uploading, setUploading] = useState(false);
+    const[uploadUrl, setImageUrl] = useState()
 
     const navigation = useNavigation()
+
+    useEffect(() => {
+        (async () => {
+          if (Platform.OS !== 'web') {
+            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (status !== 'granted') {
+              alert('Sorry, we need camera roll permissions to make this work!');
+            }
+          }
+        })();
+      }, []);
 
     useEffect(() => {
         firebase.firestore().collection("produce").get().then((doc)=>{
@@ -30,22 +48,83 @@ function AddProduct() {
         })
     }, [])
 
-    function addProduct(){
-        let asd = {
-            produce_category : ItemName,
-            produce: subItem,
-            createdAt: new Date(Date.now()).toString(),
-            price: price,
-            items: items,
-            delivery: delivery,
-            u_id:"lLXFN6xZAiwol0JEeIJ2",
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });    
+        console.log(result);
+         if (!result.cancelled) {
+             setImage(result)
+          //_handleImagePicked(result)
         }
-        firebase.firestore().collection("products").add(asd).then(()=>{
-            console.log("Item added")
-            navigation.goBack()
-        }).catch((e)=>{
-            console.log(e)
-        })
+      };
+
+     const UploadImageAndPost = async () => {
+        try {
+         setUploading({ uploading: true });    
+          if (!image.cancelled) {
+            const uploadUrl = await uploadImageAsync(image.uri);
+            setImageUrl({ image: uploadUrl });
+          }
+        } catch (e) {
+          console.log(e);          
+        } finally {
+          setUploading({ uploading: false });
+        }
+      };
+        
+    async function uploadImageAsync(uri) {      
+      const blob = await new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          resolve(xhr.response);
+        };
+        xhr.onerror = function (e) {
+          console.log(e);
+          reject(new TypeError("Network request failed"));
+        };
+        xhr.responseType = "blob";
+        xhr.open("GET", uri, true);
+        xhr.send(null);
+      });
+    
+      const ref = firebase.storage().ref().child(uuid.v4());
+      const snapshot = await ref.put(blob);    
+      // We're done with the blob, close and release it     
+      //blob.close();
+    
+      const url = await snapshot.ref.getDownloadURL();
+      setUrl(url)
+      console.log(url)
+       if(url){
+           addProduct(url)
+       }
+      return url
+    }
+
+   function addProduct(url){
+        
+            let asd = {
+                produce_category : ItemName,
+                produce: subItem,
+                createdAt: new Date(Date.now()).toString(),
+                price: price,
+                items: items,
+                delivery: delivery, 
+                images:url,              
+                u_id:"lLXFN6xZAiwol0JEeIJ2",
+            }
+            firebase.firestore().collection("products").add(asd).then(()=>{
+                console.log("Item added")
+                navigation.goBack()
+            }).catch((e)=>{
+                console.log(e)
+            })
+        
     }
     
     function displayItems(item){
@@ -69,7 +148,7 @@ function AddProduct() {
     return (
         <View style={{padding:SIZES.padding*2, height:"100%", backgroundColor:COLORS.white}}>
             <Text style={{...FONTS.h5}}>Add a product to your catalogue for buyers to see what you have in stock.</Text>
-
+            
             <View style={{marginTop:30,}}>
     <Text  style={{...FONTS.h5, marginVertical:10}}>Select a  category and produce name below</Text>
                {doc &&  <FlatList
@@ -92,7 +171,7 @@ function AddProduct() {
                 }}
             />  }
                 <Text style={{...FONTS.h5, marginVertical:10}}>Add Gallery</Text>
-                <TouchableOpacity style={{borderRadius:20, marginHorizontal:5, backgroundColor:COLORS.dark}}><Text style={{color:COLORS.white, textAlign:"center", padding:SIZES.padding, ...FONTS.h5}}>Add Images</Text></TouchableOpacity> 
+                <TouchableOpacity onPress={()=>pickImage()} style={{borderRadius:20, marginHorizontal:5, backgroundColor:COLORS.dark}}><Text style={{color:COLORS.white, textAlign:"center", padding:SIZES.padding, ...FONTS.h5}}>Add Images</Text></TouchableOpacity> 
                 <Text style={{...FONTS.h5, marginTop:10}}>Price</Text>
                 <TextInput placeholder="How much does it cost" onChangeText={(value)=>setPrice(value)} style={{padding: SIZES.padding*2,}} />
                 <Text style={{...FONTS.h5, marginTop:10}}>Items Available</Text>
@@ -104,8 +183,8 @@ function AddProduct() {
                 </View>
             </View>
             <View style={{position:"absolute", bottom:20, left:20, right:20}}>
-                <TouchableOpacity style={{backgroundColor:COLORS.black, borderRadius:10, paddingHorizontal:30, paddingVertical:20}} onPress={()=>addProduct()}>
-                    <Text style={{color:COLORS.white, textAlign:"right", ...FONTS.h4}}>Add Product<Feather name="arrow-right" style={{marginLeft:30}} size={24} color="white" /></Text>
+                <TouchableOpacity style={{backgroundColor:COLORS.black, borderRadius:10, paddingHorizontal:30, paddingVertical:20}} onPress={()=>UploadImageAndPost()}>
+                    <Text style={{color:COLORS.white, textAlign:"right", ...FONTS.h4}}>Add Product <View style={{justifyContent:"center", alignItems:"center"}}><Feather name="arrow-right" size={24} color="white" /></View></Text>
                 </TouchableOpacity>
             </View>
         </View>

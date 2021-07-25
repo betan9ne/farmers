@@ -8,6 +8,13 @@ import {Feather} from "@expo/vector-icons"
 const ViewProduce = ({route}) => {
     let data = route.params.item
     const[item, setItem] = useState(data)
+
+    useEffect(() => {
+        firebase.firestore().collection("products").doc(data.id)
+        .update({
+            views: firebase.firestore.FieldValue.increment(1)
+        })
+    }, [])
     console.log(item)
     return (
         <View style={{backgroundColor:COLORS.white, height:"100%", padding:SIZES.padding*2}}>

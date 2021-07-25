@@ -6,7 +6,19 @@ import {useNavigation} from '@react-navigation/native'
 import {Feather} from "@expo/vector-icons"
 
 const ViewProduct = ({route}) => {
+
+    let navigation = useNavigation()
     let data = route.params.item
+
+    function DeleteItem()
+    {
+        firebase.firestore().collection("products").doc(data.id).delete().then(()=>{            
+            console.log("deleted")
+            navigation.goBack()
+        })    
+    }
+
+    
     const[item, setItem] = useState(data)
     console.log(item)
     return (
@@ -23,7 +35,7 @@ const ViewProduct = ({route}) => {
                     <TouchableOpacity style={{flex:1, borderRadius:10, backgroundColor:COLORS.secondary, marginHorizontal:5}}>
                         <Text style={{color:COLORS.white, ...FONTS.h6, padding:SIZES.padding*2, textAlign:"center", }}>Update</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={{flex:1, borderRadius:10, backgroundColor:COLORS.black, marginHorizontal:5}}>
+                    <TouchableOpacity onPress={()=>DeleteItem()} style={{flex:1, borderRadius:10, backgroundColor:COLORS.black, marginHorizontal:5}}>
                         <Text  style={{color:COLORS.white, ...FONTS.h6, padding:SIZES.padding*2, textAlign:"center", }}>Delete</Text>
                     </TouchableOpacity>
                 </View>                

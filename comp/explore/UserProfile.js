@@ -6,12 +6,13 @@ import {useNavigation} from '@react-navigation/native'
 import {Feather} from "@expo/vector-icons"
 import MasonryList from '@react-native-seoul/masonry-list'
 import useGetUserProduce from '../crud/useGetUserProduce'
+import useGetViewCount from '../crud/useGetViewCount'
 
 const UserProfile = ({route}) => {
     let user = route.params.item
     let data = useGetUserProduce(user.id).docs
-    console.log(route.params.item)
-    const navigation = useNavigation()
+    let counter = useGetViewCount("5spOQxILGlrltyZZfRtO")
+     const navigation = useNavigation()
 
     const renderItem = ({ item }) => (           
         <TouchableOpacity  onPress={()=>navigation.navigate("viewProduce",{item})} key={item.id} style={{paddingVertical:10, height:280, borderRadius:10, margin:5, backgroundColor:COLORS.white}}>
@@ -42,7 +43,7 @@ const UserProfile = ({route}) => {
                     <Text style={{flex:1, textAlign:"center", fontWeight:"900", ...FONTS.h5 }}>{user.type}</Text>
                 </View>
             </View>
-            <Text style={{textAlign:"center", marginBottom:10, fontSize:14, fontWeight:"900"}}><Feather name="eye" color="black" size={18} /> 21.4k</Text>
+            <Text style={{textAlign:"center", marginBottom:10, fontSize:14, fontWeight:"900"}}><Feather name="eye" color="black" size={18} /> {counter}</Text>
            <Text style={{marginBottom:10, textAlign:"center", color:COLORS.secondary, ...FONTS.h4}}>{data && data.length} Items</Text>
             <MasonryList 
                 data={data}
