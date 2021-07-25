@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react'
-import {Text, View,  TouchableOpacity, ActivityIndicator, TextInput, Platform, FlatList} from 'react-native'
+import {Text, View,  TouchableOpacity, Modal, StyleSheet, ScrollView, TextInput, Platform, FlatList} from 'react-native'
 import firebase from '../../firebase'
 import { SIZES, FONTS, COLORS } from "../../constants"
 import {useNavigation} from '@react-navigation/native'
@@ -16,6 +16,7 @@ function AddProduct() {
     const[subItem, setSubItem] = useState(null)
     const[ItemName, setItemname] = useState(null)
     const[url, setUrl] = useState(null)
+    const[modalVisible, setModalVisibility] = useState(false)
 
     const [image, setImage] = useState(null);
     const [uploading, setUploading] = useState(false);
@@ -65,7 +66,8 @@ function AddProduct() {
 
      const UploadImageAndPost = async () => {
         try {
-         setUploading({ uploading: true });    
+         setUploading({ uploading: true }); 
+         setModalVisibility(true)   
           if (!image.cancelled) {
             const uploadUrl = await uploadImageAsync(image.uri);
             setImageUrl({ image: uploadUrl });
@@ -74,6 +76,7 @@ function AddProduct() {
           console.log(e);          
         } finally {
           setUploading({ uploading: false });
+          setModalVisibility(false)
         }
       };
         
@@ -146,7 +149,20 @@ function AddProduct() {
     )
 
     return (
-        <View style={{padding:SIZES.padding*2, height:"100%", backgroundColor:COLORS.white}}>
+        <ScrollView style={{backgroundColor:COLORS.white, flex:1}}>
+        <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}         
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={{...FONTS.h4}}>Thank you, we are adding details to the database</Text>
+            <Text style={{alignText:"center", ...FONTS.h6}}>Please do not leave the page until upload is complete and prompt will disappear</Text>
+              </View>
+        </View>
+      </Modal>
+      <View style={{backgroundColor:COLORS.white, padding:SIZES.padding*2}}>
             <Text style={{...FONTS.h5}}>Add a product to your catalogue for buyers to see what you have in stock.</Text>
             
             <View style={{marginTop:30,}}>
@@ -170,9 +186,9 @@ function AddProduct() {
                 contentContainerStyle={{                    
                 }}
             />  }
-                <Text style={{...FONTS.h5, marginVertical:10}}>Add Gallery</Text>
-                <TouchableOpacity onPress={()=>pickImage()} style={{borderRadius:20, marginHorizontal:5, backgroundColor:COLORS.dark}}><Text style={{color:COLORS.white, textAlign:"center", padding:SIZES.padding, ...FONTS.h5}}>Add Images</Text></TouchableOpacity> 
-                <Text style={{...FONTS.h5, marginTop:10}}>Price</Text>
+                <Text style={{...FONTS.h5, marginVertical:10}}>Add Cover image</Text>
+                <TouchableOpacity onPress={()=>pickImage()} style={{borderRadius:10,paddingVertical:10, marginHorizontal:5, backgroundColor:COLORS.black}}><Text style={{color:COLORS.white, textAlign:"center", padding:SIZES.padding, ...FONTS.h5}}>Add Images</Text></TouchableOpacity> 
+                <Text style={{...FONTS.h4, marginTop:10, color:COLORS.white}}>Price</Text>
                 <TextInput placeholder="How much does it cost" onChangeText={(value)=>setPrice(value)} style={{padding: SIZES.padding*2,}} />
                 <Text style={{...FONTS.h5, marginTop:10}}>Items Available</Text>
                 <TextInput placeholder="What do you have available" onChangeText={(value)=>setItems(value)} style={{padding: SIZES.padding*2,}} />
@@ -181,14 +197,29 @@ function AddProduct() {
                     <TouchableOpacity onPress={()=>setDelivery("0")} style={{flex:1, borderRadius:10, marginHorizontal:5, backgroundColor: delivery === "0" ? COLORS.secondary : COLORS.black}}><Text style={{color:COLORS.white, textAlign:"center", padding:SIZES.padding, ...FONTS.h5}}>Stationary</Text></TouchableOpacity> 
                     <TouchableOpacity onPress={()=>setDelivery("1")} style={{flex:1, borderRadius:10, marginHorizontal:5, backgroundColor: delivery === "1" ? COLORS.secondary : COLORS.black}}><Text style={{color:COLORS.white, textAlign:"center", padding:SIZES.padding, ...FONTS.h5}}>Mobile</Text></TouchableOpacity> 
                 </View>
-            </View>
-            <View style={{position:"absolute", bottom:20, left:20, right:20}}>
-                <TouchableOpacity style={{backgroundColor:COLORS.black, borderRadius:10, paddingHorizontal:30, paddingVertical:20}} onPress={()=>UploadImageAndPost()}>
+            </View>  
+            <TouchableOpacity style={{backgroundColor:COLORS.black, marginTop:40, borderRadius:10, paddingHorizontal:30, paddingVertical:20}} onPress={()=>UploadImageAndPost()}>
                     <Text style={{color:COLORS.white, textAlign:"right", ...FONTS.h4}}>Add Product <View style={{justifyContent:"center", alignItems:"center"}}><Feather name="arrow-right" size={24} color="white" /></View></Text>
-                </TouchableOpacity>
-            </View>
+                </TouchableOpacity>         
         </View>
+        
+        </ScrollView>
     )
 }
 
+const styles = StyleSheet.create({
+    centeredView: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",      
+      backgroundColor:'rgba(0,0,0,0.8)'
+    },
+    modalView: {
+      margin: 20,
+      backgroundColor: "white",
+      borderRadius: 5,
+      padding: 35,
+      alignItems: "center",
+        },
+     });
 export default AddProduct
