@@ -9,20 +9,56 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-export default function Signin() {
+import { useState } from "react";
+import { useRef } from "react";
+import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
+import firebase from "../../firebase";
+
+function Signin() {
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const recaptchaVerifire = useRef(null);
+  const [verificationId, setVerificationId] = useState(null);
+  const [code, setCode] = useState("");
+
+  // function to request for a verification code
+
+  const sendVerification = () => {
+    const phoneProvider = new firebase.auth.PhoneAuthProvider();
+    phoneProvider
+      .verifyPhoneNumber("+26" + phoneNumber, recaptchaVerifire.current)
+      .then(setVerificationId);
+  };
+
+  const confirmCode = () => {
+    const credential = firebase.auth.PhoneAuthProvider.credential(
+      verificationId,
+      code
+    );
+    firebase
+      .auth()
+      .signInWithCredential(credential)
+      .then((result) => {
+        // do something amazing
+        let userId = firebase.auth().currentUser.uid;
+        console.log(userId);
+      });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.titleText2}>Farmers</Text>
-      <Text style={styles.titleText}>Login to continue</Text>
+      <Text style={styles.titleText}>Enter number to continue</Text>
       <TextInput
         // value="Phone Number"
         keyboardType="number-pad"
         placeholder="+260 7XX XXX XXX"
         placeholderTextColor="black"
         style={styles.input}
+        autoCompleteType="tel"
+        onChangeText={setPhoneNumber}
       />
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={sendVerification}>
         <Text style={styles.buttonText}>Get OTP </Text>
       </TouchableOpacity>
 
@@ -31,18 +67,25 @@ export default function Signin() {
         keyboardType="number-pad"
         placeholder="Enter OTP"
         placeholderTextColor="black"
+        onChangeText={setCode}
         style={styles.input}
       />
-      <TouchableOpacity style={styles.buttonLogin}>
-        <Text style={styles.buttonText}>Login </Text>
+      <TouchableOpacity style={styles.buttonLogin} onPress={confirmCode}>
+        <Text style={styles.buttonText}> Login </Text>
       </TouchableOpacity>
+
+      <FirebaseRecaptchaVerifierModal
+        ref={recaptchaVerifire}
+        firebaseConfig={firebase.app().options}
+        attemptInvisibleVerification={true | false /* experimental */}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.6,
+    flex: 1,
     width: "70%",
     // backgroundColor: '#ecf0f1',
     alignItems: "center",
@@ -90,3 +133,4 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
 });
+export default Signin;
