@@ -203,7 +203,7 @@ function profile() {
         padding: SIZES.padding,
         backgroundColor: COLORS.white,
         marginBottom: 80,
-        height: SIZES.height,
+        paddingBottom:90
       }}
     >
       <View style={{ padding: SIZES.padding * 2, height: 60 }}>
@@ -211,7 +211,7 @@ function profile() {
       </View>
       <View style={{ padding: SIZES.padding * 2 }}>
         <Text style={{ ...FONTS.h2, fontWeight: "900", textAlign: "center" }}>
-          {user.name}
+          {user && user.name}
         </Text>
         <View
           style={{
@@ -231,7 +231,7 @@ function profile() {
               ...FONTS.h5,
             }}
           >
-            @{user.username}
+            @{user && user.username}
           </Text>
           <Text
             style={{
@@ -242,7 +242,7 @@ function profile() {
               ...FONTS.h6,
             }}
           >
-            {user.gender}
+            {user && user.gender}
           </Text>
           <Text
             style={{
@@ -254,7 +254,7 @@ function profile() {
               ...FONTS.h6,
             }}
           >
-            {user.district}
+            {user && user.district}
           </Text>
         </View>
 
@@ -267,7 +267,7 @@ function profile() {
               fontWeight: "900",
             }}
           >
-            {user.province}
+            {user && user.province}
           </Text>
           <Text
             style={{
@@ -277,7 +277,7 @@ function profile() {
               fontWeight: "900",
             }}
           >
-            {user.phone}
+            {user && user.phone}
           </Text>
           <Text
             style={{
@@ -287,7 +287,7 @@ function profile() {
               fontWeight: "900",
             }}
           >
-            {user.type}
+            {user && user.type}
           </Text>
         </View>
       </View>

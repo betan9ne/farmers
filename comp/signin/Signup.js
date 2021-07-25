@@ -53,26 +53,14 @@ import firebase from './../../firebase'
       });
   };
 
-  // validating errors
-  const validateUsername = () => {
-    if (username < 3) {
-      console.log("username is less than 3 " + username);
-    }
-    if (name < 3) {
-      console.log("name is less than 3 " + name);
-    }
-    if (!phoneNumber) {
-      console.log(
-        "phone number should be more than 8 characters " + phoneNumber
-      );
-    }
-  };
 
   return (
-    <ScrollView style={{backgroundColor:COLORS.white, padding:SIZES.padding*3, flex:1}}>
-      
-      <Text style={{...FONTS.h2, marginBottom:30}}>Register to get Started</Text>
-      <Text style={{}}></Text>
+    <ScrollView style={{backgroundColor:COLORS.white, padding:SIZES.padding*3, flex:1}}>  
+    <FirebaseRecaptchaVerifierModal
+        ref={recaptchaVerifire}
+        firebaseConfig={firebase.app().options}
+        attemptInvisibleVerification={false} />  
+        <Text style={{...FONTS.h2, marginBottom:30}}>Register to get Started</Text>
       <View style={styles.miniContainer}>
         <Text style={styles.label}>Username</Text>
         <TextInput
@@ -124,7 +112,6 @@ import firebase from './../../firebase'
         />
       </View>
 
-      <View style={styles.miniContainer}>
         <Text style={styles.label}>User Type</Text>
         <TextInput
           keyboardType="default"
@@ -144,9 +131,7 @@ import firebase from './../../firebase'
           onChangeText={setPhoneNumber}
         />
     
-        <TouchableOpacity style={styles.buttonLogin} onPress={sendVerification}>
-          <Text style={styles.buttonText}>Get OTP </Text>
-        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonLogin} onPress={sendVerification}><Text style={styles.buttonText}>Get OTP</Text></TouchableOpacity>
         <View style={{height:20}}></View>
         <TextInput
           // value="OTP"
@@ -156,21 +141,11 @@ import firebase from './../../firebase'
           onChangeText={setCode}
           style={styles.input}
         />
-      </View>
-
-      <TouchableOpacity style={styles.buttonLogin} onPress={confirmCode}>
-        <Text style={styles.buttonText}>Register</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.buttonLogin_} onPress={()=>navigation.navigate("Login")}>
-        <Text style={styles.buttonLoginText}>Already have an account? Login.</Text>
-      </TouchableOpacity>
-
-      <FirebaseRecaptchaVerifierModal
-        ref={recaptchaVerifire}
-        firebaseConfig={firebase.app().options}
-        attemptInvisibleVerification={true || false /* experimental */}
-      />
+    
+      <TouchableOpacity style={styles.buttonLogin} onPress={confirmCode}><Text style={styles.buttonText}>Register</Text></TouchableOpacity>
+      <TouchableOpacity style={styles.buttonLogin_} onPress={()=>navigation.navigate("Login")}><Text style={styles.buttonLoginText}>Already have an account? Login.</Text></TouchableOpacity>
+       
+       
     </ScrollView>
   );
 }

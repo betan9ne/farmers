@@ -15,7 +15,7 @@ const Welcome = ({ navigation }) => {
     <View style={styles.container}>
       {/* <ImageBackground source={image} style={styles.bgimage}> */}
       <Image source={require("./../../assets/img.png")} style={styles.image} />
-      <Text style={styles.txth1}> Welcome!</Text>
+      <Text style={styles.txth1}>Welcome!</Text>
       <Text style={styles.txth2}>
         {" "}
         Farming should be easy and convenient and thats why we believe this
@@ -26,15 +26,13 @@ const Welcome = ({ navigation }) => {
         <TouchableOpacity
           style={styles.button1}
           onPress={() => navigation.navigate("Register")}
-        >
-          <Text style={styles.buttonText}>Sign up</Text>
+        ><Text style={{textAlign:"left"}}>Sign up</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.button2}
           onPress={() => navigation.navigate("Login")}
-        >
-          <Text style={styles.buttonText}>Log in</Text>
+        ><Text style={styles.buttonText}>Log in</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -45,9 +43,11 @@ const styles = StyleSheet.create({
   container: {
     width: SIZES.width,
     height: SIZES.height,
-    backgroundColor: COLORS.lightGray,
-    alignItems: "center",
+       alignItems: "center",
     justifyContent: "center",
+  },
+  buttonText:{
+    textAlign:"right"
   },
   miniContainer: {
     padding: SIZES.padding * 2,
@@ -58,13 +58,13 @@ const styles = StyleSheet.create({
     right: 0,
   },
   button1: {
-    flex: 0.9,
+    flex: 0.5,
     textAlign: "left",
     backgroundColor: "rgb(240,240,240)",
     padding: SIZES.padding * 2,
   },
   button2: {
-    flex: 0.1,
+    flex: 0.5,
     textAlign: "right",
     backgroundColor: "rgb(240,240,240)",
     padding: SIZES.padding * 2,
