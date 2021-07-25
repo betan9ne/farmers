@@ -1,16 +1,16 @@
-import React, {useState, useRef, Component } from 'react';
-import { Alert, SafeAreaView, TextInput, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import React, {useState, useRef } from 'react';
+import { Alert, SafeAreaView, TextInput, StyleSheet, Text, ScrollView, View, TouchableOpacity } from 'react-native';
 import { SIZES, COLORS, FONTS } from '../../constants';
 import {FirebaseRecaptchaVerifierModal} from 'expo-firebase-recaptcha'
 import firebase from './../../firebase'
-import {useNavigation} from '@react-navigation/native'
-export default function Signup() {
+ 
+ const Signup = ({navigation}) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const recaptchaVerifire = useRef(null);
   const [verificationId, setVerificationId] = useState(null);
   const [code, setCode] = useState("");
-
-  const navigation = useNavigation()
+  
+  
   const [username, setusername] = useState("");
   const [name, setname] = useState("");
   const [gender, setgender] = useState("");
@@ -69,7 +69,7 @@ export default function Signup() {
   };
 
   return (
-    <View style={{backgroundColor:COLORS.white, padding:SIZES.padding*3, height:"100%"}}>
+    <ScrollView style={{backgroundColor:COLORS.white, padding:SIZES.padding*3, flex:1}}>
       
       <Text style={{...FONTS.h2, marginBottom:30}}>Register to get Started</Text>
       <Text style={{}}></Text>
@@ -169,11 +169,12 @@ export default function Signup() {
       <FirebaseRecaptchaVerifierModal
         ref={recaptchaVerifire}
         firebaseConfig={firebase.app().options}
-        attemptInvisibleVerification={true | false /* experimental */}
+        attemptInvisibleVerification={true || false /* experimental */}
       />
-    </View>
+    </ScrollView>
   );
 }
+
 
 // Just some styles
 
@@ -181,7 +182,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop:40,
-        height:"100%",
+        
        padding:SIZES.padding*2
 }, 
  input:{
@@ -216,3 +217,5 @@ const styles = StyleSheet.create({
  }
 
 });
+
+export default Signup

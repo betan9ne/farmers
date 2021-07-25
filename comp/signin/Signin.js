@@ -1,7 +1,6 @@
-import React, {useState, Component } from "react";
+import React, {useState, useRef} from "react";
 import {TextInput,  StyleSheet,  Text,  View,  TouchableOpacity,} from "react-native";
 import { SIZES, COLORS, FONTS } from '../../constants';
-import { useRef } from "react";
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 import firebase from "../../firebase";
 
@@ -12,14 +11,14 @@ function Signin() {
   const [code, setCode] = useState("");
 
   const sendVerification = () => {
-    const phoneProvider = new firebase.auth.PhoneAuthProvider();
+    const phoneProvider = new firebase.auth().PhoneAuthProvider();
     phoneProvider
       .verifyPhoneNumber("+26" + phoneNumber, recaptchaVerifire.current)
       .then(setVerificationId);
   };
 
   const confirmCode = () => {
-    const credential = firebase.auth.PhoneAuthProvider.credential(
+    const credential = firebase.auth().PhoneAuthProvider.credential(
       verificationId,
       code
     );
@@ -35,7 +34,7 @@ function Signin() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titleText2}>Welcome back, </Text>
+      <Text style={styles.titleText2}>Welcome back,</Text>
       <Text style={styles.titleText}>Enter number to continue</Text>
       <TextInput
         // value="Phone Number"
@@ -47,8 +46,7 @@ function Signin() {
         onChangeText={setPhoneNumber}
       />
 
-      <TouchableOpacity style={styles.buttonLogin_} onPress={sendVerification}>
-        <Text style={styles.buttonLoginText}>Get OTP </Text>
+      <TouchableOpacity style={styles.buttonLogin_} onPress={sendVerification}><Text style={styles.buttonLoginText}>Get OTP </Text>
       </TouchableOpacity>
     <View style={{height:20}}></View>
       <TextInput
@@ -59,9 +57,7 @@ function Signin() {
         onChangeText={setCode}
         style={styles.input}
       />
-      <TouchableOpacity style={styles.buttonLogin} onPress={confirmCode}>
-        <Text style={styles.buttonText}> Login </Text>
-      </TouchableOpacity>
+      <TouchableOpacity style={styles.buttonLogin} onPress={confirmCode}><Text style={styles.buttonText}>Login</Text></TouchableOpacity>
 
       <FirebaseRecaptchaVerifierModal
         ref={recaptchaVerifire}
