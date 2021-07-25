@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Alert, Button, TextInput, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Alert, SafeAreaView, TextInput, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { SIZES, COLORS, FONTS } from '../../constants';
 
 // Name
 // gender
@@ -11,11 +12,9 @@ import { Alert, Button, TextInput, StyleSheet, Text, View, TouchableOpacity } fr
 export default function Signup() {
 
   return (
-    <View style={styles.container}>
-        <Text style={styles.titleText2}>Farmers</Text>
+    <SafeAreaView style={styles.container}>
         <Text style={styles.titleText}>Sign-up to create an account</Text>
         
-
         <View style={styles.miniContainer}>
         <Text style={styles.label}>*Full Name</Text>
         <TextInput
@@ -73,23 +72,19 @@ export default function Signup() {
 
 
         <TouchableOpacity 
-        style={styles.buttonLogin}>
-        <Text style={styles.buttonText}>Login </Text>
+        style={{backgroundColor:COLORS.black, padding:SIZES.padding*2, borderRadius:10}}>
+        <Text style={{color:COLORS.white, ...FONTS.h4, textAlign:"right" }}>Login </Text>
         </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: .9,
-        width: '80%',
-        // backgroundColor: '#ecf0f1',
-        alignItems: 'center',
-        justifyContent: 'center',
-        // borderWidth: .5,
-        // borderRadius: 9,
-        // borderColor: 'black',
+        flex: 1,
+        marginTop:40,
+        height:"100%",
+       padding:SIZES.padding*2
 },
 
 miniContainer: {
@@ -131,20 +126,5 @@ miniContainer: {
         borderRadius: 5,
         borderColor: 'black',
 },
-    button: {
-        fontSize: 6,
-        //   backgroundColor: 'lightgrey',
-        padding: 3,
-        marginBottom: 10,
-        borderWidth: .3,
-        borderRadius: 5,
-},
-    buttonLogin: {
-        fontSize: 10,
-        backgroundColor: 'rgb(137, 234, 139)',
-        color: 'white',
-        padding: 6,
-        margin: 3,
-        borderRadius: 5,
-}
+ 
 });
