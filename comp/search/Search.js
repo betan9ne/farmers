@@ -1,5 +1,5 @@
 import React,{useState, useRef, useEffect} from 'react'
-import {Text, View, KeyboardAvoidingView, Platform, TouchableOpacity, TextInput, FlatList} from 'react-native'
+import {Text, View, KeyboardAvoidingView, ScrollView, TouchableOpacity, TextInput, FlatList} from 'react-native'
 import firebase from '../../firebase'
 import { SIZES, FONTS, COLORS } from "../../constants"
 import {Feather} from "@expo/vector-icons"
@@ -59,8 +59,8 @@ function Search() {
     )
 
     return (
-   
-        <View style={{padding:SIZES.padding,backgroundColor:COLORS.white, height:SIZES.height}}>
+        
+        <View style={{padding:SIZES.padding,backgroundColor:COLORS.white,}}>
              <View style={{padding:SIZES.padding*2,}}>
         <Text style={{...FONTS.h2}}>Search</Text>
         <View style={{flexDirection:"row", width:"100%"}}>
@@ -80,7 +80,7 @@ function Search() {
                 }}
             />  }
     </View>
-           
+    <ScrollView style={{backgroundColor:COLORS.white, height:SIZES.height-120, marginBottom:0, paddingBottom:90}}>
             {
                 searchResults.length !== 0 ? 
                 <View>
@@ -106,7 +106,8 @@ function Search() {
                     <Feather name="plus" size={24} color="white" />
                 </TouchableOpacity>
             </View>
-}
+            }
+            </ScrollView>
         </View>
        
     )

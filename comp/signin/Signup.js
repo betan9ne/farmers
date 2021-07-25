@@ -1,29 +1,16 @@
-import React, { Component } from "react";
-import { useState } from "react";
-import {
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  Keyboard,
-} from "react-native";
-import { useRef } from "react";
-import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
-import firebase from "../../firebase";
-import {
-  Alert,
-  Button,
-  TextInput,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-} from "react-native";
-
-export default function Signup() {
+import React, {useState, useRef } from 'react';
+import { Alert, SafeAreaView, TextInput, StyleSheet, Text, ScrollView, View, TouchableOpacity } from 'react-native';
+import { SIZES, COLORS, FONTS } from '../../constants';
+import {FirebaseRecaptchaVerifierModal} from 'expo-firebase-recaptcha'
+import firebase from './../../firebase'
+ 
+ const Signup = ({navigation}) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const recaptchaVerifire = useRef(null);
   const [verificationId, setVerificationId] = useState(null);
   const [code, setCode] = useState("");
-
+  
+  
   const [username, setusername] = useState("");
   const [name, setname] = useState("");
   const [gender, setgender] = useState("");
@@ -59,7 +46,7 @@ export default function Signup() {
           gender: gender,
           district: district,
           province: province,
-          usertype: usertype,
+          type: usertype,
           phone: phoneNumber,
         });
         console.log(userId);
@@ -82,11 +69,12 @@ export default function Signup() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.titleText2}>Farmers</Text>
-      <Text style={styles.titleText}>Sign-up to create an account</Text>
+    <ScrollView style={{backgroundColor:COLORS.white, padding:SIZES.padding*3, flex:1}}>
+      
+      <Text style={{...FONTS.h2, marginBottom:30}}>Register to get Started</Text>
+      <Text style={{}}></Text>
       <View style={styles.miniContainer}>
-        <Text style={styles.label}>*Username</Text>
+        <Text style={styles.label}>Username</Text>
         <TextInput
           keyboardType="default"
           placeholder="Harry Mwanga Nkumbula"
@@ -97,7 +85,7 @@ export default function Signup() {
           onChangeText={setusername}
         />
 
-        <Text style={styles.label}>*Full Name</Text>
+        <Text style={styles.label}>Full Name</Text>
         <TextInput
           keyboardType="default"
           placeholder="*Idah Chama"
@@ -117,7 +105,7 @@ export default function Signup() {
       </View>
 
       <View style={styles.miniContainer}>
-        <Text style={styles.label}>*District</Text>
+        <Text style={styles.label}>District</Text>
         <TextInput
           keyboardType="default"
           placeholder="Kabwata"
@@ -126,7 +114,7 @@ export default function Signup() {
           onChangeText={setdistrict}
         />
 
-        <Text style={styles.label}>*Province</Text>
+        <Text style={styles.label}>Province</Text>
         <TextInput
           keyboardType="default"
           placeholder="Lusaka"
@@ -137,7 +125,7 @@ export default function Signup() {
       </View>
 
       <View style={styles.miniContainer}>
-        <Text style={styles.label}>*User Type</Text>
+        <Text style={styles.label}>User Type</Text>
         <TextInput
           keyboardType="default"
           placeholder="Buyer / Seller"
@@ -146,7 +134,7 @@ export default function Signup() {
           onChangeText={setusertype}
         />
 
-        <Text style={styles.label}>*Phone</Text>
+        <Text style={styles.label}>Phone</Text>
         <TextInput
           keyboardType="default"
           placeholder="+260 97X XXX XXX"
@@ -155,11 +143,11 @@ export default function Signup() {
           style={styles.input}
           onChangeText={setPhoneNumber}
         />
-
-        <TouchableOpacity style={styles.button} onPress={sendVerification}>
+    
+        <TouchableOpacity style={styles.buttonLogin} onPress={sendVerification}>
           <Text style={styles.buttonText}>Get OTP </Text>
         </TouchableOpacity>
-
+        <View style={{height:20}}></View>
         <TextInput
           // value="OTP"
           keyboardType="number-pad"
@@ -170,85 +158,64 @@ export default function Signup() {
         />
       </View>
 
-      <TouchableOpacity style={styles.buttonLogin} onPress={validateUsername}>
-        <Text style={styles.buttonText}> Register </Text>
+      <TouchableOpacity style={styles.buttonLogin} onPress={confirmCode}>
+        <Text style={styles.buttonText}>Register</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.buttonLogin_} onPress={()=>navigation.navigate("Login")}>
+        <Text style={styles.buttonLoginText}>Already have an account? Login.</Text>
       </TouchableOpacity>
 
       <FirebaseRecaptchaVerifierModal
         ref={recaptchaVerifire}
         firebaseConfig={firebase.app().options}
-        attemptInvisibleVerification={true | false /* experimental */}
+        attemptInvisibleVerification={true || false /* experimental */}
       />
-    </View>
+    </ScrollView>
   );
 }
+
 
 // Just some styles
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: "80%",
-    // backgroundColor: '#ecf0f1',
-    alignItems: "center",
-    justifyContent: "center",
-    // borderWidth: .5,
-    // borderRadius: 9,
-    // borderColor: 'black',
-  },
+    container: {
+        flex: 1,
+        marginTop:40,
+        
+       padding:SIZES.padding*2
+}, 
+ input:{
+    paddingVertical:10, 
+    paddingHorizontal:20
+ },
+ label:{
+     ...FONTS.h5,
+     marginVertical:5
+ },
+ buttonLogin:{
+     backgroundColor:COLORS.black,
+     borderRadius:10,
+     paddingVertical:20,
+     marginVertical:5,
+ },
+ buttonText:{
+    color:COLORS.white,
+    textAlign:"center",
+    ...FONTS.h5
+ },
+ buttonLoginText:{
+    color:COLORS.black,
+    textAlign:"center",
+    ...FONTS.h5
+ },
+ buttonLogin_:{
+    backgroundColor:COLORS.white,
+    borderRadius:10,
+     paddingVertical:20,
+     marginVertical:5,
+ }
 
-  miniContainer: {
-    width: "80%",
-    // backgroundColor: '#ecf0f1',
-    alignItems: "center",
-    margin: 5,
-    paddingBottom: 5,
-    justifyContent: "center",
-    borderWidth: 0.5,
-    borderRadius: 9,
-    borderColor: "rgb(163, 252, 165 )",
-  },
-
-  titleText: {
-    fontSize: 18,
-    marginBottom: 5,
-    color: "black",
-  },
-  titleText2: {
-    marginBottom: 20,
-    fontSize: 22,
-    color: "black",
-  },
-  label: {
-    // backgroundColor: '#ecf0f1',
-    margin: 10,
-  },
-  input: {
-    fontSize: 10,
-    padding: 5,
-    margin: 3,
-    // marginBottom: 5,
-    width: 100,
-    textAlign: "center",
-    backgroundColor: "rgb(243, 243, 243)",
-    //   borderWidth: .5,
-    borderRadius: 5,
-    borderColor: "black",
-  },
-  button: {
-    fontSize: 6,
-    //   backgroundColor: 'lightgrey',
-    padding: 3,
-    marginBottom: 10,
-    borderWidth: 0.3,
-    borderRadius: 5,
-  },
-  buttonLogin: {
-    fontSize: 10,
-    backgroundColor: "rgb(137, 234, 139)",
-    color: "white",
-    padding: 6,
-    margin: 3,
-    borderRadius: 5,
-  },
 });
+
+export default Signup

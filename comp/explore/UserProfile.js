@@ -11,7 +11,7 @@ import useGetViewCount from '../crud/useGetViewCount'
 const UserProfile = ({route}) => {
     let user = route.params.item
     let data = useGetUserProduce(user.id).docs
-    let counter = useGetViewCount("5spOQxILGlrltyZZfRtO")
+    let counter = useGetViewCount(firebase.auth().currentUser.uid)
      const navigation = useNavigation()
 
     const renderItem = ({ item }) => (           

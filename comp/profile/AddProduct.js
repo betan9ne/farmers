@@ -119,7 +119,7 @@ function AddProduct() {
                 items: items,
                 delivery: delivery, 
                 images:url,              
-                u_id:"lLXFN6xZAiwol0JEeIJ2",
+                u_id:firebase.auth().currentUser.uid,
             }
             firebase.firestore().collection("products").add(asd).then(()=>{
                 console.log("Item added")
@@ -158,7 +158,7 @@ function AddProduct() {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={{...FONTS.h4}}>Thank you, we are adding details to the database</Text>
-            <Text style={{alignText:"center", ...FONTS.h6}}>Please do not leave the page until upload is complete and prompt will disappear</Text>
+            <Text style={{textAlign:"center", ...FONTS.h6}}>Please do not leave the page until upload is complete and prompt will disappear</Text>
               </View>
         </View>
       </Modal>
@@ -189,9 +189,9 @@ function AddProduct() {
                 <Text style={{...FONTS.h5, marginVertical:10}}>Add Cover image</Text>
                 <TouchableOpacity onPress={()=>pickImage()} style={{borderRadius:10,paddingVertical:10, marginHorizontal:5, backgroundColor:COLORS.black}}><Text style={{color:COLORS.white, textAlign:"center", padding:SIZES.padding, ...FONTS.h5}}>Add Images</Text></TouchableOpacity> 
                 <Text style={{...FONTS.h4, marginTop:10, color:COLORS.white}}>Price</Text>
-                <TextInput placeholder="How much does it cost" onChangeText={(value)=>setPrice(value)} style={{padding: SIZES.padding*2,}} />
+                <TextInput keyboardType="number-pad" placeholder="How much does it cost" onChangeText={(value)=>setPrice(value)} style={{padding: SIZES.padding*2,}} />
                 <Text style={{...FONTS.h5, marginTop:10}}>Items Available</Text>
-                <TextInput placeholder="What do you have available" onChangeText={(value)=>setItems(value)} style={{padding: SIZES.padding*2,}} />
+                <TextInput keyboardType="number-pad" placeholder="What do you have available" onChangeText={(value)=>setItems(value)} style={{padding: SIZES.padding*2,}} />
                 <Text style={{...FONTS.h5, marginTop:10}}>Do you offer delivery?</Text>
                 <View style={{flexDirection:"row", marginTop:10}}>
                     <TouchableOpacity onPress={()=>setDelivery("0")} style={{flex:1, borderRadius:10, marginHorizontal:5, backgroundColor: delivery === "0" ? COLORS.secondary : COLORS.black}}><Text style={{color:COLORS.white, textAlign:"center", padding:SIZES.padding, ...FONTS.h5}}>Stationary</Text></TouchableOpacity> 
