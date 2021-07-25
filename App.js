@@ -1,14 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+
 import React,{useEffect, useState} from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from '@react-navigation/native'
 import { useFonts } from 'expo-font';
 import Tabs from './navigation/tabs'
 import firebase_ from './firebase'
-import profile from './comp/profile/profile';
 import AddProduct from './comp/profile/AddProduct';
 import ManageProducts from './comp/profile/ManageProducts';
+import ViewProduct from './comp/profile/ViewProduct';
+import UserProfile from './comp/explore/UserProfile';
+import ViewProduce from './comp/explore/ViewProduce';
 
 const Stack = createStackNavigator();
 
@@ -73,8 +75,9 @@ const App = () => {
                   <Stack.Screen name="Home" component={Tabs} />
                   <Stack.Screen name="addProduct" component={AddProduct} options={{headerShown:true, title:"Add Product"}} />
                   <Stack.Screen name="manageProduct" component={ManageProducts} options={{headerShown:true, title:"My Products"}} />
-         
-                  
+                  <Stack.Screen name="viewProduct" component={ViewProduct} options={{headerShown:true, title:"Produce Details"}} />
+                  <Stack.Screen name="userProfile" component={UserProfile} options={{headerShown:true, title:"Profile"}} />
+                  <Stack.Screen name="viewProduce" component={ViewProduce} options={{headerShown:true, title:"Produce Details"}} />
               </Stack.Navigator>
           </NavigationContainer>
       )

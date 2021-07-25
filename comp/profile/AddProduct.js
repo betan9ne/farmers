@@ -38,6 +38,7 @@ function AddProduct() {
             price: price,
             items: items,
             delivery: delivery,
+            u_id:"1",
         }
         firebase.firestore().collection("products").add(asd).then(()=>{
             console.log("Item added")
@@ -70,7 +71,7 @@ function AddProduct() {
             <Text style={{...FONTS.h5}}>Add a product to your catalogue for buyers to see what you have in stock.</Text>
 
             <View style={{marginTop:30,}}>
-    <Text  style={{...FONTS.h5, marginVertical:10}}>Select Item : {ItemName+", "+ subItem}</Text>
+    <Text  style={{...FONTS.h5, marginVertical:10}}>Select a  category and produce name below</Text>
                {doc &&  <FlatList
             data={doc}
             horizontal

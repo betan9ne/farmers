@@ -5,7 +5,7 @@ import { SIZES, FONTS, COLORS } from "../../constants"
 
 function Explore() {
     return (
-        <View style={{padding:SIZES.padding*2}}>
+        <View style={{padding:SIZES.padding*2, height:"100%", backgroundColor:COLORS.white}}>
             <Text style={{...FONTS.h2}}>Explore</Text>
         </View>
     )

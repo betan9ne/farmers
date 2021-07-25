@@ -25,15 +25,15 @@ function ManageProducts() {
 console.log(docs)
 
 const renderItem = ({ item }) => (           
-    <TouchableOpacity  style={{paddingVertical:10, marginVertical:10, backgroundColor:COLORS.white}}>
-        <Text style={{paddingHorizontal:20, ...FONTS.h5, color:COLORS.black}}>{item.produce}</Text>
+    <TouchableOpacity onPress={()=>navigation.navigate("viewProduce",{item})} style={{paddingVertical:10, borderRadius:10, marginVertical:10, backgroundColor:COLORS.white}}>
+        <Text style={{paddingHorizontal:20, ...FONTS.h4, color:COLORS.black}}>{item.produce}</Text>
         <Text style={{paddingHorizontal:20, ...FONTS.h6, color:COLORS.black}}>{item.produce_category}</Text>
-        <Text style={{paddingHorizontal:20, ...FONTS.h6, color:COLORS.secondary}}>{item.price}</Text>
+        <Text style={{paddingHorizontal:20, ...FONTS.h6, color:COLORS.secondary}}>Price: {item.price}</Text>
     </TouchableOpacity>
 )
 
     return (
-        <View style={{backgroundColor:COLORS.white, padding:SIZES.padding*2, height:"100%"}}>
+        <View style={{ padding:SIZES.padding*2, height:"100%"}}>
             <Text  style={{...FONTS.h5, marginVertical:10}}>You can view, edit and delete your items from here</Text>
                {docs &&  <FlatList
             data={docs}

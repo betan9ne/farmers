@@ -9,13 +9,14 @@ function profile() {
     const navigation = useNavigation()
     //buyer, farmer, transporter
     return (
-        <ScrollView style={{padding:SIZES.padding,backgroundColor:COLORS.white, marginBottom:80, height:SIZES.height}}>
+    <ScrollView style={{padding:SIZES.padding,backgroundColor:COLORS.white, marginBottom:80, height:SIZES.height}}>
         <View style={{padding:SIZES.padding*2, height:60}}>
-        <Text style={{...FONTS.h2}}>Profile</Text>
-    </View>
+            <Text style={{...FONTS.h2}}>Profile</Text>
+        </View>
     <View style={{padding: SIZES.padding*2,}}>
-        <Text style={{...FONTS.h3, fontWeight:"900", textAlign:"center"}}>Chisomo Mwanza</Text>
+        <Text style={{...FONTS.h2, fontWeight:"900", textAlign:"center"}}>Chisomo Mwanza</Text>
         <View style={{marginTop:10, justifyCOntent:"center", alignItems:"center"}}>
+        <Text style={{ backgroundColor:COLORS.secondary, fontWeight:"900", paddingHorizontal:20, borderRadius:10, color:COLORS.white, paddingVertical:10, ...FONTS.h5}}>@farmerJones</Text>
             <Text style={{ backgroundColor:COLORS.white, marginHorizontal:10, color:COLORS.dark, padding:5, ...FONTS.h6}}>Male</Text>
             <Text style={{ backgroundColor:COLORS.lightGray, fontWeight:"900", marginHorizontal:10, color:COLORS.dark, padding:5, ...FONTS.h6}}>Chongwe</Text>
         </View>
