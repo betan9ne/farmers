@@ -150,7 +150,7 @@ function AddProduct() {
             <Text style={{...FONTS.h5}}>Add a product to your catalogue for buyers to see what you have in stock.</Text>
             
             <View style={{marginTop:30,}}>
-    <Text  style={{...FONTS.h5, marginVertical:10}}>Select a  category and produce name below</Text>
+                <Text  style={{...FONTS.h5, marginVertical:10}}>Select a  category and produce name below</Text>
                {doc &&  <FlatList
             data={doc}
             horizontal

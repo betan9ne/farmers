@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react'
-import {Text, View,  TouchableOpacity, TextInput, Image, FlatList} from 'react-native'
+import {Text, View,  TouchableOpacity,  Image, ScrollView, FlatList} from 'react-native'
 import firebase from '../../firebase'
 import { SIZES, FONTS, COLORS } from "../../constants"
 import {useNavigation} from '@react-navigation/native'
@@ -16,11 +16,31 @@ const ViewProduce = ({route}) => {
         })
     }, [])
     console.log(item)
+
+    const renderItem = ({ item }) => (           
+        <TouchableOpacity  style={{paddingVertical:10, borderRadius:10, backgroundColor:COLORS.white}}>
+       <Image  style={{flex:1, height:220, borderRadius:10, resizeMode:'cover'}}
+                source={{
+                    uri: item,
+                }}
+                />              
+        </TouchableOpacity>
+    )
+
+
     return (
-        <View style={{backgroundColor:COLORS.white, height:"100%", padding:SIZES.padding*2}}>
-            <View style={{height:150}}></View> 
-            
-            <View>
+        <ScrollView style={{backgroundColor:COLORS.white,}}>
+
+        <View style={{backgroundColor:COLORS.white, flex:1, padding:SIZES.padding*2}}>
+            <View style={{height:250}}>
+            <Image  style={{width:"100%", height:"100%", borderRadius:10, resizeMode:'cover'}}
+                source={{
+                    uri: data.images,
+                }}
+                />
+            </View> 
+
+            <View style={{paddingTop:10, marginHorizontal:20, marginTop:-30, backgroundColor:COLORS.white, borderRadius:10,}}>
                 <Text style={{color:COLORS.black, ...FONTS.h2,  textAlign:"center", fontWeight:"900"}}>{item.produce}</Text>
                 <Text style={{color:COLORS.secondary, ...FONTS.h4, textAlign:"center", }}>{item.produce_category}</Text>
                 <Text style={{color:COLORS.darkgray, ...FONTS.h6, textAlign:"center", }}>
@@ -43,7 +63,19 @@ const ViewProduce = ({route}) => {
                     <Text style={{color:COLORS.white, ...FONTS.h2, textAlign:"center", }}>{item.items}</Text>
                 </View>
             </View>
+
+            <Text style={{...FONTS.h4, marginVertical:20}}>Gallery</Text>
+            {data &&  <FlatList
+            data={data.gallery}
+            veertical
+            showsHorizontalScrollIndicator={false}               
+                keyExtractor={item => `${item}`}
+                renderItem={renderItem}
+                contentContainerStyle={{                    
+                }}
+            />  }
         </View>
+        </ScrollView>
     )
 }
 

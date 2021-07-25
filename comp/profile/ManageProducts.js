@@ -22,7 +22,6 @@ function ManageProducts() {
             setDocs(asd)
         })
     },[])
-console.log(docs)
 
 const renderItem = ({ item }) => (           
     <TouchableOpacity onPress={()=>navigation.navigate("viewProduct",{item})} style={{paddingVertical:10, borderRadius:10, marginVertical:10, backgroundColor:COLORS.white}}>

@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react'
-import {Text, View, ScrollView, TouchableOpacity, TextInput, Button} from 'react-native'
+import {Text, View, ScrollView, TouchableOpacity, SafeAreaView} from 'react-native'
 import firebase from '../../firebase'
 import { SIZES, FONTS, COLORS } from "../../constants"
 import {useNavigation} from '@react-navigation/native'
@@ -42,6 +42,7 @@ console.log(user)
     }
 
     return (
+
     <ScrollView style={{padding:SIZES.padding,backgroundColor:COLORS.white, marginBottom:80, height:SIZES.height}}>
         <View style={{padding:SIZES.padding*2, height:60}}>
             <Text style={{...FONTS.h2}}>Profile</Text>

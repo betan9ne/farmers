@@ -18,7 +18,7 @@ const UserProfile = ({route}) => {
         <TouchableOpacity  onPress={()=>navigation.navigate("viewProduce",{item})} key={item.id} style={{paddingVertical:10, height:280, borderRadius:10, margin:5, backgroundColor:COLORS.white}}>
              <Image  style={{width:"100%", height:220, borderRadius:10, resizeMode:'cover'}}
         source={{
-          uri: 'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
+          uri: item.images,
         }}
       />
         <View style={{width:"85%", marginTop:-40, paddingVertical:10, marginLeft:10, borderRadius:10, backgroundColor:COLORS.black}}>
