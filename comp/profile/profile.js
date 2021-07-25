@@ -8,7 +8,7 @@ import useGetUser from '../crud/useGetUser'
 
 function profile() {
     const navigation = useNavigation()
-    let user = useGetUser("lLXFN6xZAiwol0JEeIJ2").docs
+    let user = useGetUser(firebase.auth().currentUser.uid).docs
     //buyer, farmer, transporter
 console.log(user)
 
@@ -39,6 +39,12 @@ console.log(user)
         }
 
        
+    }
+
+    const logout =() =>{
+        firebase.auth().signOut().then(() =>{
+            console.log("logged out")
+        })
     }
 
     return (
@@ -84,9 +90,9 @@ console.log(user)
         <View style={{flex:1, marginHorizontal:5, borderRadius:10, justifyContent:"center", alignItems:"center", backgroundColor:COLORS.black}}>
             <Text style={{color:COLORS.white, ...FONTS.h4, padding:SIZES.padding*4, textAlign:"center", fontWeight:"900"}}><Feather name="info" size={24} color="white"/>{"\n\n"}About FStore</Text>
         </View> 
-        <View style={{flex:1, marginHorizontal:5, borderRadius:10, justifyContent:"center", alignItems:"center", backgroundColor:COLORS.dark}}>
+        <TouchableOpacity onPress={()=>logout()} style={{flex:1, marginHorizontal:5, borderRadius:10, justifyContent:"center", alignItems:"center", backgroundColor:COLORS.dark}}>
             <Text style={{color:COLORS.white, ...FONTS.h4, padding:SIZES.padding*4, textAlign:"center", fontWeight:"900"}}><Feather name="log-out" size={24} color="white"/>{"\n\n"}Logout</Text>
-        </View>            
+        </TouchableOpacity>            
     </View>
     </ScrollView>
     )

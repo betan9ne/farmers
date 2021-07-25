@@ -1,15 +1,6 @@
-import React, { Component } from "react";
-import {
-  Alert,
-  Button,
-  TextInput,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-} from "react-native";
-
-import { useState } from "react";
+import React, {useState, Component } from "react";
+import {TextInput,  StyleSheet,  Text,  View,  TouchableOpacity,} from "react-native";
+import { SIZES, COLORS, FONTS } from '../../constants';
 import { useRef } from "react";
 import { FirebaseRecaptchaVerifierModal } from "expo-firebase-recaptcha";
 import firebase from "../../firebase";
@@ -19,8 +10,6 @@ function Signin() {
   const recaptchaVerifire = useRef(null);
   const [verificationId, setVerificationId] = useState(null);
   const [code, setCode] = useState("");
-
-  // function to request for a verification code
 
   const sendVerification = () => {
     const phoneProvider = new firebase.auth.PhoneAuthProvider();
@@ -46,22 +35,22 @@ function Signin() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titleText2}>Farmers</Text>
+      <Text style={styles.titleText2}>Welcome back, </Text>
       <Text style={styles.titleText}>Enter number to continue</Text>
       <TextInput
         // value="Phone Number"
         keyboardType="number-pad"
-        placeholder="+260 7XX XXX XXX"
-        placeholderTextColor="black"
+        placeholder="097XX XXX XXX"
+        placeholderTextColor={COLORS.lightGray}
         style={styles.input}
         autoCompleteType="tel"
         onChangeText={setPhoneNumber}
       />
 
-      <TouchableOpacity style={styles.button} onPress={sendVerification}>
-        <Text style={styles.buttonText}>Get OTP </Text>
+      <TouchableOpacity style={styles.buttonLogin_} onPress={sendVerification}>
+        <Text style={styles.buttonLoginText}>Get OTP </Text>
       </TouchableOpacity>
-
+    <View style={{height:20}}></View>
       <TextInput
         // value="OTP"
         keyboardType="number-pad"
@@ -84,53 +73,52 @@ function Signin() {
 }
 
 const styles = StyleSheet.create({
+  buttonLoginText:{
+    color:COLORS.black,
+    textAlign:"center",
+    ...FONTS.h5
+ },
+ buttonLogin_:{
+    backgroundColor:COLORS.white,
+    borderRadius:10,
+     paddingVertical:20,
+     marginVertical:5,
+ },
   container: {
     flex: 1,
-    width: "70%",
-    // backgroundColor: '#ecf0f1',
-    alignItems: "center",
-    marginBottom: 140,
-    padding: 30,
+    backgroundColor:COLORS.white,     
+    padding: SIZES.padding*3,
     justifyContent: "center",
-    borderWidth: 0.5,
-    borderRadius: 9,
-    borderColor: "rgb(163, 252, 165 )",
   },
   titleText: {
-    fontSize: 18,
-    color: "black",
+    ...FONTS.h5,
+    color: COLORS.black,
   },
   titleText2: {
     marginBottom: 80,
     fontSize: 22,
     color: "black",
   },
-  input: {
-    fontSize: 10,
-    padding: 5,
-    margin: 3,
-    width: 130,
-    textAlign: "center",
-    backgroundColor: "#ecf0f1",
-    //   borderWidth: .5,
-    borderRadius: 5,
-    borderColor: "black",
+  buttonText:{
+    color:COLORS.white,
+    textAlign:"center",
+    ...FONTS.h5
+  },
+  input: {    
+    padding: 10,
+    borderRadius: 10,
   },
   button: {
-    fontSize: 6,
-    //   backgroundColor: 'lightgrey',
-    padding: 3,
+     padding: 3,
     margin: 3,
     marginTop: 50,
-    borderWidth: 0.3,
-    borderRadius: 5,
+    
   },
   buttonLogin: {
-    fontSize: 6,
-    backgroundColor: "rgb(163, 252, 165 )",
-    padding: 12,
-    margin: 3,
-    borderRadius: 5,
+    backgroundColor:COLORS.black,
+    borderRadius:10,
+    paddingVertical:20,
+    marginVertical:10,
   },
 });
 export default Signin;

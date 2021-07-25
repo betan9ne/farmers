@@ -119,7 +119,7 @@ function AddProduct() {
                 items: items,
                 delivery: delivery, 
                 images:url,              
-                u_id:"lLXFN6xZAiwol0JEeIJ2",
+                u_id:firebase.auth().currentUser.uid,
             }
             firebase.firestore().collection("products").add(asd).then(()=>{
                 console.log("Item added")
