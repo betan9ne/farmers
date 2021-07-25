@@ -53,7 +53,7 @@ export const FONTS = {
     h3: { fontFamily: "Roboto-Bold", fontSize: SIZES.h3, lineHeight: 24 },
     h4: { fontFamily: "Roboto-Bold", fontSize: SIZES.h4, lineHeight: 22 },
     h5: { fontFamily: "Roboto-Regular", fontSize: SIZES.h5, lineHeight: 20 },
-    h6: { fontFamily: "Roboto-bold", fontSize: SIZES.h6, lineHeight: 18 },
+    h6: { fontFamily: "Roboto-Bold", fontSize: SIZES.h6, lineHeight: 18 },
     body1: { fontFamily: "Roboto-Regular", fontSize: SIZES.body1, lineHeight: 36 },
     body2: { fontFamily: "Roboto-Regular", fontSize: SIZES.body2, lineHeight: 30 },
     body3: { fontFamily: "Roboto-Regular", fontSize: SIZES.body3, lineHeight: 22 },

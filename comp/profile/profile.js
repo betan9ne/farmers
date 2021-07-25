@@ -4,10 +4,13 @@ import firebase from '../../firebase'
 import { SIZES, FONTS, COLORS } from "../../constants"
 import {useNavigation} from '@react-navigation/native'
 import {Feather} from "@expo/vector-icons"
+import useGetUser from '../crud/useGetUser'
 
 function profile() {
     const navigation = useNavigation()
+    let user = useGetUser("lLXFN6xZAiwol0JEeIJ2").docs
     //buyer, farmer, transporter
+console.log(user)
 
     function createUsers(){
         const names = ["Aaran", "Aaren", "Aarez", "Aarman", "Aaron", "Aaron-James", "Aarron", "Aaryan", "Aaryn", "Aayan", "Aazaan", "Abaan", "Abbas", "Abdallah", "Abdalroof", "Abdihakim", "Abdirahman", "Abdisalam", "Abdul", "Abdul-Aziz", "Abdulbasir", "Abdulkadir"]
@@ -44,17 +47,17 @@ function profile() {
             <Text style={{...FONTS.h2}}>Profile</Text>
         </View>
     <View style={{padding: SIZES.padding*2,}}>
-        <Text style={{...FONTS.h2, fontWeight:"900", textAlign:"center"}}>Chisomo Mwanza</Text>
+    <Text style={{...FONTS.h2, fontWeight:"900", textAlign:"center"}}>{user.name}</Text>
         <View style={{marginTop:10, justifyCOntent:"center", alignItems:"center"}}>
-        <Text style={{ backgroundColor:COLORS.secondary, fontWeight:"900", paddingHorizontal:20, borderRadius:10, color:COLORS.white, paddingVertical:10, ...FONTS.h5}}>@farmerJones</Text>
-            <Text style={{ backgroundColor:COLORS.white, marginHorizontal:10, color:COLORS.dark, padding:5, ...FONTS.h6}}>Male</Text>
-            <Text style={{ backgroundColor:COLORS.lightGray, fontWeight:"900", marginHorizontal:10, color:COLORS.dark, padding:5, ...FONTS.h6}}>Chongwe</Text>
+    <Text style={{ backgroundColor:COLORS.secondary, fontWeight:"900", paddingHorizontal:20, borderRadius:10, color:COLORS.white, paddingVertical:10, ...FONTS.h5}}>@{user.username}</Text>
+    <Text style={{ backgroundColor:COLORS.white, marginHorizontal:10, color:COLORS.dark, padding:5, ...FONTS.h6}}>{user.gender}</Text>
+    <Text style={{ backgroundColor:COLORS.lightGray, fontWeight:"900", marginHorizontal:10, color:COLORS.dark, padding:5, ...FONTS.h6}}>{user.district}</Text>
         </View>
         
         <View style={{flexDirection:"row", marginVertical:20}}>
-            <Text style={{flex:1, textAlign:"center", ...FONTS.h5, fontWeight:"900"}}>Lusaka</Text>        
-            <Text style={{flex:1, textAlign:"center", ...FONTS.h5, fontWeight:"900"}}>0978314539</Text>
-            <Text style={{flex:1, textAlign:"center", ...FONTS.h5, fontWeight:"900"}}>Buyer</Text>
+    <Text style={{flex:1, textAlign:"center", ...FONTS.h5, fontWeight:"900"}}>{user.province}</Text>        
+            <Text style={{flex:1, textAlign:"center", ...FONTS.h5, fontWeight:"900"}}>{user.phone}</Text>
+            <Text style={{flex:1, textAlign:"center", ...FONTS.h5, fontWeight:"900"}}>{user.type}</Text>
         </View>
     </View>
     

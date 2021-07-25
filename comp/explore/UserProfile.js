@@ -20,7 +20,7 @@ const UserProfile = ({route}) => {
           uri: 'https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
         }}
       />
-        <View style={{width:"85%", marginTop:-30, paddingVertical:10, marginLeft:20, borderRadius:10, backgroundColor:COLORS.black}}>
+        <View style={{width:"85%", marginTop:-40, paddingVertical:10, marginLeft:10, borderRadius:10, backgroundColor:COLORS.black}}>
             <Text style={{paddingHorizontal:20, ...FONTS.h5, color:COLORS.white}}>{item.produce}</Text>
             <Text style={{paddingHorizontal:20, ...FONTS.h6, color:COLORS.white}}>{item.produce_category}</Text>
             <Text style={{paddingHorizontal:20, ...FONTS.h6, color:COLORS.secondary}}>Price: {item.price}</Text>
@@ -28,11 +28,11 @@ const UserProfile = ({route}) => {
         </TouchableOpacity>
     )
     return (
-    <ScrollView style={{padding:SIZES.padding,backgroundColor:COLORS.white, marginBottom:80, height:SIZES.height}}>
+    <ScrollView style={{padding:SIZES.padding,backgroundColor:COLORS.white, marginBottom:0, height:SIZES.height}}>
             <View style={{}}>
                 <Text style={{...FONTS.h2, fontWeight:"900", textAlign:"center"}}>{user.name}</Text>
                 <View style={{marginTop:10, justifyCOntent:"center", alignItems:"center"}}>
-                    <Text style={{ backgroundColor:COLORS.secondary, fontWeight:"900", paddingHorizontal:20, borderRadius:10, color:COLORS.white, paddingVertical:5, ...FONTS.h5}}>{user.username}</Text>
+                    <Text style={{ backgroundColor:COLORS.secondary, fontWeight:"900", paddingHorizontal:20, borderRadius:10, color:COLORS.white, paddingVertical:5, ...FONTS.h5}}>@{user.username}</Text>
                     <Text style={{ backgroundColor:COLORS.lightGray, fontWeight:"900", marginHorizontal:10, color:COLORS.dark, padding:5, ...FONTS.h6}}>{user.district}</Text>
                 </View>
         
@@ -51,6 +51,7 @@ const UserProfile = ({route}) => {
                 showsVerticalScrollIndicator={false}
                 renderItem={renderItem}
             />
+            <View style={{height:30, backgroundColor:COLORS.white}}></View>
     </ScrollView>
     )
 }

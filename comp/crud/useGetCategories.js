@@ -1,7 +1,7 @@
 import React from 'react'
 import firebase from '../..//firebase'
 
-const useGetCategories  =(id) => {
+const useGetCategories  =() => {
     const[docs, setDocs] = React.useState([])
 
     React.useEffect(() => { 

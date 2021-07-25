@@ -1,5 +1,5 @@
 import React,{useState, useRef, useEffect} from 'react'
-import {Text, View,  TouchableOpacity, TextInput, FlatList} from 'react-native'
+import {Text, View, KeyboardAvoidingView, Platform, TouchableOpacity, TextInput, FlatList} from 'react-native'
 import firebase from '../../firebase'
 import { SIZES, FONTS, COLORS } from "../../constants"
 import {Feather} from "@expo/vector-icons"
@@ -30,11 +30,15 @@ function Search() {
     )
 
     return (
+        <KeyboardAvoidingView
+        behavior={Platform.OS === "android" ? "padding" : "height"}
+        style={{flex:1}}
+      >
         <View style={{padding:SIZES.padding,backgroundColor:COLORS.white, height:SIZES.height}}>
              <View style={{padding:SIZES.padding*2,}}>
         <Text style={{...FONTS.h2}}>Search</Text>
         <View style={{flexDirection:"row", width:"100%"}}>
-            <TextInput returnKeyType="Search" ref={searchBOx}  placeholder="search for something" onChangeText={(value)=>setSearch(value)} style={{padding: SIZES.padding, borderRadius:10, borderColor:COLORS.lightGray, borderWidth:0.4, marginRight:10, flex:1}} />
+            <TextInput returnKeyType="search" ref={searchBOx}  placeholder="search for something" onChangeText={(value)=>setSearch(value)} style={{padding: SIZES.padding, borderRadius:10, borderColor:COLORS.lightGray, borderWidth:0.4, marginRight:10, flex:1}} />
             <TouchableOpacity style={{backgroundColor:COLORS.black, alignSelf:"flex-end", padding:SIZES.padding, borderRadius:10}}>
                 <Feather name="search" size={24} color="white" />
             </TouchableOpacity>
@@ -63,6 +67,7 @@ function Search() {
             </View>
     
         </View>
+        </KeyboardAvoidingView>
     )
 }
 

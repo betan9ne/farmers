@@ -10,7 +10,7 @@ function ManageProducts() {
     const navigation = useNavigation()
     const[docs, setDocs] = useState(null)
     useEffect(()=>{
-        firebase.firestore().collection("products").where("u_id", "==", "lLXFN6xZAiwol0JEeIJ2").onSnapshot((snap)=>{
+        firebase.firestore().collection("products").where("u_id", "==", "lLXFN6xZAiwol0JEeIJ2").orderBy("createdAt", "desc").onSnapshot((snap)=>{
             let asd =[]
             snap.docs.forEach(e=>{
                 let sdf ={
