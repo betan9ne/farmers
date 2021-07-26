@@ -40,6 +40,11 @@ function Signin() {
 
   return (
     <View style={styles.container}>
+        <FirebaseRecaptchaVerifierModal
+        ref={recaptchaVerifire}
+        firebaseConfig={firebase.app().options}
+        attemptInvisibleVerification={false}
+      />
       <Text style={styles.titleText2}>Welcome back,</Text>
       <Text style={styles.titleText}>Enter number to continue</Text>
       <TextInput
@@ -67,12 +72,6 @@ function Signin() {
       <TouchableOpacity style={styles.buttonLogin} onPress={confirmCode}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-
-      <FirebaseRecaptchaVerifierModal
-        ref={recaptchaVerifire}
-        firebaseConfig={firebase.app().options}
-        attemptInvisibleVerification={true | false /* experimental */}
-      />
     </View>
   );
 }
