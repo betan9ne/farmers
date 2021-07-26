@@ -12,7 +12,7 @@ import ViewProduce from "./comp/explore/ViewProduce";
 import Signin from "./comp/signin/Signin";
 import Signup from "./comp/signin/Signup";
 import Welcome from "./comp/signin/Welcome";
-import { View } from "react-native";
+import { Text, View } from "react-native";
 
 const Stack = createStackNavigator();
 
