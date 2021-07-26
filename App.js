@@ -12,7 +12,7 @@ import ViewProduce from "./comp/explore/ViewProduce";
 import Signin from "./comp/signin/Signin";
 import Signup from "./comp/signin/Signup";
 import Welcome from "./comp/signin/Welcome";
-import Test from "./comp/signin/Test";
+import { View } from "react-native";
 
 const Stack = createStackNavigator();
 
@@ -43,14 +43,13 @@ const App = () => {
     return null;
   }
 
-  // if(!loaded_)
-  // {
-  //   return (
-  //       <View>
-  //         <Text>Loading</Text>
-  //       </View>
-  //   )
-  // }
+  if (!loaded_) {
+    return (
+      <View>
+        <Text>Loading</Text>
+      </View>
+    );
+  }
 
   if (!loggedin) {
     return (
