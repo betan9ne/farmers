@@ -15,6 +15,8 @@ import Welcome from "./comp/signin/Welcome";
 import Test from "./comp/signin/Test";
 import Inquiry from "./comp/orders/Inquiry";
 import EditProduct from "./comp/profile/EditProduct";
+import { View, Text } from "react-native";
+import updateProfile from "./comp/profile/UpdateProfile";
 
 const Stack = createStackNavigator();
 
