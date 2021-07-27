@@ -129,7 +129,7 @@ const ViewProduct = ({route}) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={{...FONTS.h4}}>Uploading Image to galley</Text>
-            <Text style={{alignText:"center", ...FONTS.h6}}>Please do not leave page until upload is complete and prompt will disappear</Text>
+            <Text style={{textAlign:"center", ...FONTS.h6}}>Please do not leave page until upload is complete and prompt will disappear</Text>
               </View>
         </View>
       </Modal>
@@ -154,14 +154,14 @@ const ViewProduct = ({route}) => {
             </View>
 
             <View style={{flexDirection:"row", marginVertical:20}}>
-            <TouchableOpacity style={{flex:1, borderRadius:10, padding:SIZES.padding*2, justifyContent:"center", alignItems:"center", backgroundColor:COLORS.dark, marginHorizontal:5}}>
+            <TouchableOpacity onPress={()=>navigation.navigate("editProduct",{item})} style={{flex:1, borderRadius:10, padding:SIZES.padding*2, justifyContent:"center", alignItems:"center", backgroundColor:COLORS.dark, marginHorizontal:5}}>
                        <Feather name="edit" color="white" size={24} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=>pickImage(1)} style={{flex:1, borderRadius:10, padding:SIZES.padding*2,justifyContent:"center", alignItems:"center", backgroundColor:COLORS.dark2, marginHorizontal:5}}>
                        <Feather name="image" color="white" size={24} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={()=>DeleteItem()} style={{flex:1, padding:SIZES.padding*2, justifyContent:"center", alignItems:"center", borderRadius:10, backgroundColor:COLORS.black, marginHorizontal:5}}>
-                        <Feather name="delete" color="white" size={24} />
+                        <Feather name="x" color="white" size={24} />
                     </TouchableOpacity>
                 </View>    
 
