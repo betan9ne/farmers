@@ -15,17 +15,20 @@ import { SIZES, FONTS, COLORS } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
 import useGetUser from "../crud/useGetUser";
 
-function updateProfile(props) {
+const updateProfile = ({ route }) => {
   const navigation = useNavigation();
 
-  let user = useGetUser(firebase.auth().currentUser.uid).docs;
+  // let user = useGetUser(firebase.auth().currentUser.uid).docs;
+  let user = route.params.user;
+
   console.log(user);
-  const [username, setusername] = useState();
-  const [name, setname] = useState();
-  const [gender, setgender] = useState();
-  const [district, setdistrict] = useState();
-  const [province, setprovince] = useState();
-  const [usertype, setusertype] = useState();
+  // console.log(data);
+  const [username, setusername] = useState(user.username);
+  const [name, setname] = useState(user.name);
+  const [gender, setgender] = useState(user.gender);
+  const [district, setdistrict] = useState(user.district);
+  const [province, setprovince] = useState(user.province);
+  const [type, setusertype] = useState(user.type);
 
   // function to request for a verification code
   let userId = firebase.auth().currentUser.uid;
@@ -33,14 +36,21 @@ function updateProfile(props) {
     // do something amazing
 
     const firestore = firebase.firestore();
-    firestore.collection("users").doc(userId).update({
-      name: name,
-      username: username,
-      gender: gender,
-      district: district,
-      province: province,
-      type: usertype,
-    });
+    firestore
+      .collection("users")
+      .doc(userId)
+      .update({
+        name: name,
+        username: username,
+        gender: gender,
+        district: district,
+        province: province,
+        type: type,
+      })
+      .then(() => {
+        navigation.goBack();
+      });
+
     console.log("update happened");
   };
 
@@ -122,7 +132,7 @@ function updateProfile(props) {
             style={styles.input}
             autoCompleteType="name"
             onChangeText={setusertype}
-            defaultValue={user && user.usertype}
+            defaultValue={user && user.type}
           />
         </View>
       </View>
@@ -133,7 +143,7 @@ function updateProfile(props) {
       </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
