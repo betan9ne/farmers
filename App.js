@@ -45,14 +45,13 @@ const App = () => {
     return null;
   }
 
-  // if(!loaded_)
-  // {
-  //   return (
-  //       <View>
-  //         <Text>Loading</Text>
-  //       </View>
-  //   )
-  // }
+  if (!loaded_) {
+    return (
+      <View>
+        <Text>Loading</Text>
+      </View>
+    );
+  }
 
   if (!loggedin) {
     return (
