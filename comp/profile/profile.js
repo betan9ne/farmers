@@ -208,18 +208,30 @@ function profile() {
             backgroundColor: COLORS.black,
           }}
         >
-          <Text
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Inquiries", { user })}
             style={{
-              color: COLORS.white,
-              ...FONTS.h4,
-              padding: SIZES.padding * 4,
-              textAlign: "center",
-              fontWeight: "900",
+              flex: 1,
+              marginHorizontal: 5,
+              borderRadius: 10,
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: COLORS.black,
             }}
           >
-            <Feather name="bell" size={24} color="white" />
-            {"\n\n"}Inquiries
-          </Text>
+            <Text
+              style={{
+                color: COLORS.white,
+                ...FONTS.h4,
+                padding: SIZES.padding * 4,
+                textAlign: "center",
+                fontWeight: "900",
+              }}
+            >
+              <Feather name="bell" size={24} color="white" />
+              {"\n\n"}Inquiries
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
 
