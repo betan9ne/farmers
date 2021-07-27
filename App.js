@@ -12,8 +12,9 @@ import ViewProduce from "./comp/explore/ViewProduce";
 import Signin from "./comp/signin/Signin";
 import Signup from "./comp/signin/Signup";
 import Welcome from "./comp/signin/Welcome";
-import { Text, View } from "react-native";
-import updateProfile from "./comp/profile/UpdateProfile";
+import Test from "./comp/signin/Test";
+import Inquiry from "./comp/orders/Inquiry";
+import EditProduct from "./comp/profile/EditProduct";
 
 const Stack = createStackNavigator();
 
@@ -91,6 +92,16 @@ const App = () => {
           name="addProduct"
           component={AddProduct}
           options={{ headerShown: true, title: "Add Product" }}
+        />
+        <Stack.Screen
+          name="editProduct"
+          component={EditProduct}
+          options={{ headerShown: true, title: "Edit Product" }}
+        />
+        <Stack.Screen
+          name="inquire"
+          component={Inquiry}
+          options={{ headerShown: true, title: "" }}
         />
         <Stack.Screen
           name="manageProduct"

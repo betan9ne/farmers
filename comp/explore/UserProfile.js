@@ -34,7 +34,7 @@ const UserProfile = ({route}) => {
                 <Text style={{...FONTS.h2, fontWeight:"900", textAlign:"center"}}>{user.name}</Text>
                 <View style={{marginTop:10, justifyCOntent:"center", alignItems:"center"}}>
                     <Text style={{ backgroundColor:COLORS.secondary, fontWeight:"900", paddingHorizontal:20, borderRadius:10, color:COLORS.white, paddingVertical:5, ...FONTS.h5}}>@{user.username}</Text>
-                    <Text style={{ backgroundColor:COLORS.lightGray, fontWeight:"900", marginHorizontal:10, color:COLORS.dark, padding:5, ...FONTS.h6}}>{user.district}</Text>
+                    <Text style={{ backgroundColor:COLORS.lightGray, fontWeight:"900", marginHorizontal:10, marginVertical:10, borderRadius:5, color:COLORS.dark, padding:10, ...FONTS.h6}}>{user.district}</Text>
                 </View>
         
                 <View style={{flexDirection:"row", marginVertical:20}}>

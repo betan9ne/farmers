@@ -199,7 +199,7 @@ function AddProduct() {
                 </View>
             </View>  
             <TouchableOpacity style={{backgroundColor:COLORS.black, marginTop:40, borderRadius:10, paddingHorizontal:30, paddingVertical:20}} onPress={()=>UploadImageAndPost()}>
-                    <Text style={{color:COLORS.white, textAlign:"right", ...FONTS.h4}}>Add Product <View style={{justifyContent:"center", alignItems:"center"}}><Feather name="arrow-right" size={24} color="white" /></View></Text>
+                    <Text style={{color:COLORS.white, textAlign:"right", ...FONTS.h4}}>Add Product</Text>
                 </TouchableOpacity>         
         </View>
         

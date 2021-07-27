@@ -387,8 +387,8 @@ function profile() {
               fontWeight: "900",
             }}
           >
-            <Feather name="heart" size={24} color="white" />
-            {"\n\n"}Rate the App
+            <Feather name="bell" size={24} color="white" />
+            {"\n\n"}Inquiries
           </Text>
         </View>
       </View>

@@ -86,9 +86,9 @@ const Tabs = () => {
                 showLabel: false,
                 style: {
                     position: 'absolute',
-                    left: 20,
-                    bottom: 30,
-                    right: 20,                       
+                    left: 0,
+                    bottom: 11,
+                    right: 0,                       
                     elevation: 0,
                     borderRadius:30,
                 }
