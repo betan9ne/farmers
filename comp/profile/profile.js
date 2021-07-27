@@ -203,7 +203,7 @@ function profile() {
         padding: SIZES.padding,
         backgroundColor: COLORS.white,
         marginBottom: 80,
-        paddingBottom:90
+        paddingBottom: 90,
       }}
     >
       <View style={{ padding: SIZES.padding * 2, height: 60 }}>
@@ -345,6 +345,7 @@ function profile() {
 
       <View style={{ flexDirection: "row", marginVertical: 5 }}>
         <TouchableOpacity
+          onPress={() => navigation.navigate("updateProfile")}
           style={{
             flex: 1,
             marginHorizontal: 5,

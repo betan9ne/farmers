@@ -13,6 +13,7 @@ import Signin from "./comp/signin/Signin";
 import Signup from "./comp/signin/Signup";
 import Welcome from "./comp/signin/Welcome";
 import { Text, View } from "react-native";
+import updateProfile from "./comp/profile/UpdateProfile";
 
 const Stack = createStackNavigator();
 
@@ -75,6 +76,9 @@ const App = () => {
     );
   }
   return (
+    // <View>
+    //   <updateProfile />
+    // </View>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
@@ -102,6 +106,11 @@ const App = () => {
           name="userProfile"
           component={UserProfile}
           options={{ headerShown: true, title: "Profile" }}
+        />
+        <Stack.Screen
+          name="updateProfile"
+          component={updateProfile}
+          options={{ headerShown: true, title: "Update Profile" }}
         />
         <Stack.Screen
           name="viewProduce"
