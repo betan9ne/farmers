@@ -26,22 +26,22 @@ const ViewProduce = ({ route }) => {
       });
   }, []);
 
-  const renderItem = ({ item }) => (
-    <TouchableOpacity
-      style={{
-        paddingVertical: 10,
-        borderRadius: 10,
-        backgroundColor: COLORS.white,
-      }}
-    >
-      <Image
-        style={{ flex: 1, height: 220, borderRadius: 10, resizeMode: "cover" }}
-        source={{
-          uri: item,
-        }}
-      />
-    </TouchableOpacity>
-  );
+  // const renderItem = ({ item }) => (
+  //   <TouchableOpacity
+  //     style={{
+  //       paddingVertical: 10,
+  //       borderRadius: 10,
+  //       backgroundColor: COLORS.white,
+  //     }}
+  //   >
+  //     <Image
+  //       style={{ flex: 1, height: 220, borderRadius: 10, resizeMode: "cover" }}
+  //       source={{
+  //         uri: item,
+  //       }}
+  //     />
+  //   </TouchableOpacity>
+  // );
 
   useEffect(() => {
     firebase
