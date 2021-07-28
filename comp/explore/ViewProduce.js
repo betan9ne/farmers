@@ -16,32 +16,8 @@ import useGetUser from "../crud/useGetUser";
 const ViewProduce = ({ route }) => {
   let data = route.params.item;
 
-  useEffect(() => {
-    firebase
-      .firestore()
-      .collection("products")
-      .doc(data.id)
-      .update({
-        views: firebase.firestore.FieldValue.increment(1),
-      });
-  }, []);
-
-  // const renderItem = ({ item }) => (
-  //   <TouchableOpacity
-  //     style={{
-  //       paddingVertical: 10,
-  //       borderRadius: 10,
-  //       backgroundColor: COLORS.white,
-  //     }}
-  //   >
-  //     <Image
-  //       style={{ flex: 1, height: 220, borderRadius: 10, resizeMode: "cover" }}
-  //       source={{
-  //         uri: item,
-  //       }}
-  //     />
-  //   </TouchableOpacity>
-  // );
+  let item = useGetUser(data.u_id).docs;
+  const navigation = useNavigation();
 
   useEffect(() => {
     firebase
@@ -126,7 +102,6 @@ const ViewProduce = ({ route }) => {
           >
             {data.delivery === "0" ? "Stationary" : "Mobile"}
           </Text>
-
           <View style={{ flexDirection: "row", marginVertical: 20 }}>
             <TouchableOpacity
               onPress={() => navigation.navigate("inquire", { data })}
@@ -137,18 +112,17 @@ const ViewProduce = ({ route }) => {
                 marginHorizontal: 5,
               }}
             >
-              {firebase.auth().currentUser.uid === data.u_id ? null : (
-                <Text
-                  style={{
-                    color: COLORS.white,
-                    ...FONTS.h5,
-                    padding: SIZES.padding * 2,
-                    textAlign: "center",
-                  }}
-                >
-                  Inquiry from {item.name}
-                </Text>
-              )}
+              <Text
+                style={{
+                  color: COLORS.white,
+                  ...FONTS.h5,
+                  padding: SIZES.padding * 2,
+                  textAlign: "center",
+                }}
+              >
+                Inquiry from {item.name}
+              </Text>
+              {/* need to make this change depending on whether the current user is the one that uploaded it. */}
             </TouchableOpacity>
           </View>
         </View>
