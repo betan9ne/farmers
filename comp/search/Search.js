@@ -7,6 +7,7 @@ import {useNavigation} from '@react-navigation/native'
 import useGetCategories from '../crud/useGetCategories'
 import SearchItem from './SearchItem'
 import useSearch from '../crud/useSearch'
+import useGetAllProducts from '../crud/useGetAllProducts'
 
 function Search() {
 
@@ -15,7 +16,7 @@ function Search() {
     const searchBOx = useRef()
     const searchButton = useRef()
     const navigation = useNavigation()
-    
+    let searchdata = useGetAllProducts().docs
     const[search, setSearch] = useState(null)
     const[status, setStatus] = useState(false)
     const[tag, setTag] = useState(0)
@@ -26,11 +27,18 @@ function Search() {
         setStatus(true)
         console.log(status)
     }
-
+    
+    let filtered = []
      //from text search input
     function searchStuff(value){
         setSearch(searchBOx.current.value)
-        setTag(value)    
+        setTag(value) 
+        filtered = searchdata.filter(value=>{
+            console.log(value.produce)
+            return value.produce.match(new RegExp(search, 'g')) ||
+            value.produce_category.match(new RegExp(search, 'g'))
+        })
+        console.log(filtered)
     }
 
     //from the tag cloud
@@ -84,7 +92,12 @@ function Search() {
             {
                 searchResults.length !== 0 ? 
                 <View>
-                    <Text style={{paddingHorizontal:20, ...FONTS.h5}}>{searchResults.length} {search} results</Text>
+                    <View style={{flexDirection:'row', paddingHorizontal:20}}>
+                    <Text style={{flex:1, ...FONTS.h5}}>{searchResults.length} {search} results</Text>
+                    <TouchableOpacity style={{flex:1, }} onPress={()=>setSearch(null)}
+                    ><Text style={{textAlign:"right", padding: 5, borderColor:COLORS.lightGray, borderRadius:5, borderWidth:0.2}}>Clear Search</Text></TouchableOpacity>
+                    </View>
+                    
                 <FlatList
                     data={searchResults}
                     vertical

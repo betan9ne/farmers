@@ -11,9 +11,9 @@ import useGetViewCount from '../crud/useGetViewCount'
 const UserProfile = ({route}) => {
     let user = route.params.item
     let data = useGetUserProduce(user.id).docs
-    let counter = useGetViewCount(firebase.auth().currentUser.uid)
+    let counter = useGetViewCount(user.id)
      const navigation = useNavigation()
-
+     
     const renderItem = ({ item }) => (           
         <TouchableOpacity  onPress={()=>navigation.navigate("viewProduce",{item})} key={item.id} style={{paddingVertical:10, height:280, borderRadius:10, margin:5, backgroundColor:COLORS.white}}>
              <Image  style={{width:"100%", height:220, borderRadius:10, resizeMode:'cover'}}

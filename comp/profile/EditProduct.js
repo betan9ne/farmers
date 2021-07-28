@@ -64,6 +64,7 @@ const EditProduct =({route})=> {
         let asd = {
             updatedAt: new Date(Date.now()).toString(),
             price: price,
+            items:items,
             delivery: delivery,             
         }
         firebase.firestore().collection("products").doc(data.id)

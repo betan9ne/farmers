@@ -19,7 +19,7 @@ const ViewProduce = ({route}) => {
         })
     }, [])
  
-    const renderItem = ({ item }) => (           
+        const renderItem = ({ item }) => (           
         <TouchableOpacity  style={{paddingVertical:10, borderRadius:10, backgroundColor:COLORS.white}}>
        <Image  style={{flex:1, height:220, borderRadius:10, resizeMode:'cover'}}
                 source={{
@@ -48,10 +48,14 @@ const ViewProduce = ({route}) => {
                 <Text style={{color:COLORS.darkgray, ...FONTS.h6, textAlign:"center", }}>
                     {data.delivery === "0" ? "Stationary" : "Mobile"}
                     </Text>
+                   
                 <View style={{flexDirection:"row", marginVertical:20}}>
                     <TouchableOpacity onPress={()=>navigation.navigate("inquire",{data})} style={{flex:1, borderRadius:10, backgroundColor:COLORS.secondary, marginHorizontal:5}}>
-            <Text style={{color:COLORS.white, ...FONTS.h5, padding:SIZES.padding*2, textAlign:"center", }}>Inquiry from {item.name}</Text>
-                    </TouchableOpacity>    
+                    {
+                    firebase.auth().currentUser.uid === data.u_id ? null : 
+                    <Text style={{color:COLORS.white, ...FONTS.h5, padding:SIZES.padding*2, textAlign:"center", }}>Inquiry from {item.name}</Text>
+                    }
+                </TouchableOpacity>    
                 </View>                
             </View>
 

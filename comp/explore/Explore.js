@@ -46,7 +46,7 @@ function Explore() {
             <View style={{marginTop:30}}>
                  <Text style={{...FONTS.h4, marginBottom:20}}>Spotlight</Text>
                 {farmers &&  <FlatList
-            data={farmers.slice(0, 10)}
+            data={farmers}
             horizontal
             showsHorizontalScrollIndicator={false}               
                 keyExtractor={item => `${item.id}`}

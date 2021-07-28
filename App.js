@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import Tabs from "./navigation/tabs";
 import firebase_ from "./firebase";
+import {Text, View} from 'react-native'
 import AddProduct from "./comp/profile/AddProduct";
 import ManageProducts from "./comp/profile/ManageProducts";
 import ViewProduct from "./comp/profile/ViewProduct";

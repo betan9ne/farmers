@@ -9,8 +9,23 @@ const Inquiry =({route}) => {
 
     let data = route.params.data
     let user = useGetUser(data.u_id).docs
-
     const[bags, setBags] = useState()
+    const[msg, setMsg] = useState()
+    function send_request(){
+        let asd ={
+            quant: bags,
+            createdAt : new Date(Date.now()).toString(),
+            price: data.price,
+            produce: data.produce,
+            seller: data.u_id,
+            buyer: firebase.auth().currentUser.uid
+        }
+        firebase.firestore().collection("inquires").add(asd).then(()=>{
+            setMsg("sent")
+        }).catch((e)=>{
+            console.log(e)
+        })
+    }
     
     return (
         <View style={{backgroundColor:COLORS.white, height:"100%",  padding:SIZES.padding}}>
@@ -29,12 +44,13 @@ const Inquiry =({route}) => {
             </View> */}
             <View style={{padding:SIZES.padding}}>
                 <Text style={{...FONTS.h4}}>Make offer</Text>
-    <Text>My current price for 1KG of {data.produce} is ZMW {data.price} {"\n"}</Text>
+                <Text>My current price for 1KG of {data.produce} is ZMW {data.price} {"\n"}</Text>
                 <Text>How many bags of {data.produce} do you need?</Text>
                 <TextInput keyboardType="number-pad" placeholder="e.g. 10" onChangeText={(value)=>setBags(value)} style={{padding: SIZES.padding, borderRadius:5, marginVertical:10, borderWidth:0.2}} />
+                <Text>{msg}</Text>
             </View>
-            <TouchableOpacity style={{backgroundColor:COLORS.black, marginTop:40, borderRadius:10, paddingHorizontal:30, paddingVertical:20}} onPress={()=>UploadImageAndPost()}>
-                    <Text style={{color:COLORS.white, textAlign:"right", ...FONTS.h4}}>Make Offer</Text>
+            <TouchableOpacity style={{backgroundColor:COLORS.black, marginTop:40, borderRadius:10, paddingHorizontal:30, paddingVertical:20}} onPress={()=>send_request()}>
+                    <Text style={{color:COLORS.white, textAlign:"right", ...FONTS.h4}}>Send request</Text>
                 </TouchableOpacity>   
         </View>
     )
