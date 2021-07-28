@@ -40,7 +40,7 @@ function Signin() {
 
   return (
     <View style={styles.container}>
-        <FirebaseRecaptchaVerifierModal
+      <FirebaseRecaptchaVerifierModal
         ref={recaptchaVerifire}
         firebaseConfig={firebase.app().options}
         attemptInvisibleVerification={false}
@@ -51,7 +51,7 @@ function Signin() {
         // value="Phone Number"
         keyboardType="number-pad"
         placeholder="097XX XXX XXX"
-        placeholderTextColor={COLORS.lightGray}
+        placeholderTextColor={COLORS.Gray}
         style={styles.input}
         autoCompleteType="tel"
         onChangeText={setPhoneNumber}

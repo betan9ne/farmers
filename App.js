@@ -16,6 +16,9 @@ import Welcome from "./comp/signin/Welcome";
 import Test from "./comp/signin/Test";
 import Inquiry from "./comp/orders/Inquiry";
 import EditProduct from "./comp/profile/EditProduct";
+import { View, Text } from "react-native";
+import updateProfile from "./comp/profile/UpdateProfile";
+import Inquiries from "./comp/profile/Inquiries";
 
 const Stack = createStackNavigator();
 
@@ -78,6 +81,9 @@ const App = () => {
     );
   }
   return (
+    // <View>
+    //   <updateProfile />
+    // </View>
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
@@ -91,12 +97,12 @@ const App = () => {
           component={AddProduct}
           options={{ headerShown: true, title: "Add Product" }}
         />
-          <Stack.Screen
+        <Stack.Screen
           name="editProduct"
           component={EditProduct}
           options={{ headerShown: true, title: "Edit Product" }}
         />
-          <Stack.Screen
+        <Stack.Screen
           name="inquire"
           component={Inquiry}
           options={{ headerShown: true, title: "" }}
@@ -115,6 +121,16 @@ const App = () => {
           name="userProfile"
           component={UserProfile}
           options={{ headerShown: true, title: "Profile" }}
+        />
+        <Stack.Screen
+          name="updateProfile"
+          component={updateProfile}
+          options={{ headerShown: true, title: "Update Profile" }}
+        />
+        <Stack.Screen
+          name="Inquiries"
+          component={Inquiries}
+          options={{ headerShown: true, title: "Inquiries" }}
         />
         <Stack.Screen
           name="viewProduce"
