@@ -7,6 +7,7 @@ import {useNavigation} from '@react-navigation/native'
 import useGetCategories from '../crud/useGetCategories'
 import SearchItem from './SearchItem'
 import useSearch from '../crud/useSearch'
+import useGetAllProducts from '../crud/useGetAllProducts'
 
 function Search() {
 
@@ -15,22 +16,46 @@ function Search() {
     const searchBOx = useRef()
     const searchButton = useRef()
     const navigation = useNavigation()
-    
+    let searchdata = useGetAllProducts().docs
     const[search, setSearch] = useState(null)
     const[status, setStatus] = useState(false)
     const[tag, setTag] = useState(0)
     let searchResults =  useSearch(search, tag).docs
-     
+    const[filteredResults, setFiltered] = useState([]) 
+
     function takeFocus(){
         searchBOx.current.focus()
         setStatus(true)
         console.log(status)
     }
-
+    
+    let filtered = []
      //from text search input
     function searchStuff(value){
         setSearch(searchBOx.current.value)
-        setTag(value)    
+        setTag(value) 
+        
+      searchdata &&  searchdata.filter((val)=>{
+            if(search == "")
+            {
+                console.log("nothing")
+            }
+            else if(searchdata && 
+                (val.produce+"").toLowerCase().includes(search.toLowerCase()) ||
+                (val.produce_category+"").toLowerCase().includes(search.toLowerCase()))
+                {
+                filtered.push(val)
+                return  val
+            }        
+        })
+        setFiltered(filtered)
+        console.log(filtered)
+        // filtered = searchdata.filter(value=>{
+        //     console.log(value.produce)
+        //     return value.produce.match(new RegExp(search, 'g')) ||
+        //     value.produce_category.match(new RegExp(search, 'g'))
+        // })
+       
     }
 
     //from the tag cloud
@@ -82,11 +107,16 @@ function Search() {
     </View>
     <ScrollView style={{backgroundColor:COLORS.white, height:SIZES.height-120, marginBottom:0, paddingBottom:90}}>
             {
-                searchResults.length !== 0 ? 
+              filteredResults &&  filteredResults.length !== 0 ? 
                 <View>
-                    <Text style={{paddingHorizontal:20, ...FONTS.h5}}>{searchResults.length} {search} results</Text>
+                    <View style={{flexDirection:'row', paddingHorizontal:20}}>
+                    <Text style={{flex:1, ...FONTS.h5}}>{filteredResults.length} {search} results</Text>
+                    <TouchableOpacity style={{flex:1, }} onPress={()=>setFiltered(null)}
+                    ><Text style={{textAlign:"right", padding: 5, borderColor:COLORS.lightGray, borderRadius:5, borderWidth:0.2}}>Clear Search</Text></TouchableOpacity>
+                    </View>
+                    
                 <FlatList
-                    data={searchResults}
+                    data={filteredResults}
                     vertical
                     showsHorizontalScrollIndicator={false}               
                         keyExtractor={item => `${item.id}`}
