@@ -16,27 +16,32 @@ import useGetUser from "../crud/useGetUser";
 const ViewProduce = ({ route }) => {
   let data = route.params.item;
 
-<<<<<<< HEAD
-  let item = useGetUser(data.u_id).docs;
-  const navigation = useNavigation();
-=======
-    useEffect(() => {
-        firebase.firestore().collection("products").doc(data.id)
-        .update({
-            views: firebase.firestore.FieldValue.increment(1)
-        })
-    }, [])
- 
-        const renderItem = ({ item }) => (           
-        <TouchableOpacity  style={{paddingVertical:10, borderRadius:10, backgroundColor:COLORS.white}}>
-       <Image  style={{flex:1, height:220, borderRadius:10, resizeMode:'cover'}}
-                source={{
-                    uri: item,
-                }}
-                />              
-        </TouchableOpacity>
-    )
->>>>>>> dbb5d9676f23be431068bfe8ba22b65321fb0661
+  useEffect(() => {
+    firebase
+      .firestore()
+      .collection("products")
+      .doc(data.id)
+      .update({
+        views: firebase.firestore.FieldValue.increment(1),
+      });
+  }, []);
+
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      style={{
+        paddingVertical: 10,
+        borderRadius: 10,
+        backgroundColor: COLORS.white,
+      }}
+    >
+      <Image
+        style={{ flex: 1, height: 220, borderRadius: 10, resizeMode: "cover" }}
+        source={{
+          uri: item,
+        }}
+      />
+    </TouchableOpacity>
+  );
 
   useEffect(() => {
     firebase
@@ -88,7 +93,6 @@ const ViewProduce = ({ route }) => {
           />
         </View>
 
-<<<<<<< HEAD
         <View
           style={{
             paddingTop: 10,
@@ -122,6 +126,7 @@ const ViewProduce = ({ route }) => {
           >
             {data.delivery === "0" ? "Stationary" : "Mobile"}
           </Text>
+
           <View style={{ flexDirection: "row", marginVertical: 20 }}>
             <TouchableOpacity
               onPress={() => navigation.navigate("inquire", { data })}
@@ -132,38 +137,21 @@ const ViewProduce = ({ route }) => {
                 marginHorizontal: 5,
               }}
             >
-              <Text
-                style={{
-                  color: COLORS.white,
-                  ...FONTS.h5,
-                  padding: SIZES.padding * 2,
-                  textAlign: "center",
-                }}
-              >
-                Inquiry from {item.name}
-              </Text>
-              {/* need to make this change depending on whether the current user is the one that uploaded it. */}
+              {firebase.auth().currentUser.uid === data.u_id ? null : (
+                <Text
+                  style={{
+                    color: COLORS.white,
+                    ...FONTS.h5,
+                    padding: SIZES.padding * 2,
+                    textAlign: "center",
+                  }}
+                >
+                  Inquiry from {item.name}
+                </Text>
+              )}
             </TouchableOpacity>
           </View>
         </View>
-=======
-            <View style={{paddingTop:10, marginHorizontal:20, marginTop:-30, backgroundColor:COLORS.white, borderRadius:10,}}>
-                <Text style={{color:COLORS.black, ...FONTS.h2,  textAlign:"center", fontWeight:"900"}}>{data.produce}</Text>
-                <Text style={{color:COLORS.secondary, ...FONTS.h4, textAlign:"center", }}>{data.produce_category}</Text>
-                <Text style={{color:COLORS.darkgray, ...FONTS.h6, textAlign:"center", }}>
-                    {data.delivery === "0" ? "Stationary" : "Mobile"}
-                    </Text>
-                   
-                <View style={{flexDirection:"row", marginVertical:20}}>
-                    <TouchableOpacity onPress={()=>navigation.navigate("inquire",{data})} style={{flex:1, borderRadius:10, backgroundColor:COLORS.secondary, marginHorizontal:5}}>
-                    {
-                    firebase.auth().currentUser.uid === data.u_id ? null : 
-                    <Text style={{color:COLORS.white, ...FONTS.h5, padding:SIZES.padding*2, textAlign:"center", }}>Inquiry from {item.name}</Text>
-                    }
-                </TouchableOpacity>    
-                </View>                
-            </View>
->>>>>>> dbb5d9676f23be431068bfe8ba22b65321fb0661
 
         <View style={{ flexDirection: "row", marginVertical: 10 }}>
           <View
