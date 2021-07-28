@@ -11,25 +11,22 @@ const Inquiry = ({ route }) => {
   let user = useGetUser(data.u_id).docs;
   const [bags, setBags] = useState(null);
 
-  let data = route.params.data;
-  let user = useGetUser(data.u_id).docs;
-  const [bags, setBags] = useState();
-  const [msg, setMsg] = useState();
-  function send_request() {
-    let asd = {
-      quant: bags,
+  function sendInquiry() {
+    let inquiry = {
+      buyer: firebase.auth().currentUser.uid,
       createdAt: new Date(Date.now()).toString(),
       price: data.price,
       produce: data.produce,
+      quant: bags,
       seller: data.u_id,
-      buyer: firebase.auth().currentUser.uid,
     };
     firebase
       .firestore()
       .collection("inquires")
-      .add(asd)
+      .add(inquiry)
       .then(() => {
-        setMsg("sent");
+        console.log("Inquiry sent");
+        navigation.goBack();
       })
       .catch((e) => {
         console.log(e);
@@ -94,7 +91,6 @@ const Inquiry = ({ route }) => {
             borderWidth: 0.2,
           }}
         />
-        <Text>{msg}</Text>
       </View>
       <TouchableOpacity
         style={{
@@ -104,10 +100,10 @@ const Inquiry = ({ route }) => {
           paddingHorizontal: 30,
           paddingVertical: 20,
         }}
-        onPress={() => send_request()}
+        onPress={() => sendInquiry()}
       >
         <Text style={{ color: COLORS.white, textAlign: "right", ...FONTS.h4 }}>
-          Send request
+          Make Offer
         </Text>
       </TouchableOpacity>
     </View>
