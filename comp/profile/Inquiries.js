@@ -48,14 +48,12 @@ function Inquiries(props) {
       >
         Time: {item.createdAt.slice(0, 16)}
       </Text>
-      <View style={styles.buttonDiv}>
-        <TouchableOpacity style={styles.button1}>
-          <Text style={styles.buttonText1}>Accept</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button2}>
-          <Text style={styles.buttonText2}>Deny</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity style={styles.button1}>
+        <Text style={styles.buttonText1}>Accept</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button2}>
+        <Text style={styles.buttonText2}>Deny</Text>
+      </TouchableOpacity>
     </TouchableOpacity>
   );
 
@@ -79,12 +77,9 @@ function Inquiries(props) {
 }
 
 const styles = StyleSheet.create({
-  buttonDiv: {
-    flexDirection: "row",
-  },
   button1: {
     width: "20%",
-    marginLeft: "2%",
+    marginLeft: "35%",
     marginTop: 10,
     textAlign: "center",
     borderRadius: 5,
@@ -98,12 +93,12 @@ const styles = StyleSheet.create({
   },
   button2: {
     width: "20%",
-    marginLeft: "2%",
+    marginLeft: "35%",
     marginTop: 10,
     textAlign: "center",
     borderRadius: 5,
     bottom: 0,
-    backgroundColor: COLORS.black,
+    backgroundColor: COLORS.primary,
     padding: SIZES.padding * 1,
   },
   buttonText2: {
