@@ -32,8 +32,8 @@ function profile() {
       style={{
         padding: SIZES.padding,
         backgroundColor: COLORS.white,
-        marginBottom: 80,
-        paddingBottom: 90,
+        marginBottom: 50,
+        paddingBottom: 50,
       }}
     >
       <View style={{ padding: SIZES.padding * 2, height: 60 }}>
@@ -63,12 +63,13 @@ function profile() {
           >
             @{user && user.username}
           </Text>
+          <View style={{flexDirection:"row", marginTop:10}}>
           <Text
             style={{
               backgroundColor: COLORS.white,
               marginHorizontal: 10,
               color: COLORS.dark,
-              padding: 5,
+              padding: 5, flex:1,
               ...FONTS.h6,
             }}
           >
@@ -76,16 +77,15 @@ function profile() {
           </Text>
           <Text
             style={{
-              backgroundColor: COLORS.lightGray,
               fontWeight: "900",
               marginHorizontal: 10,
               color: COLORS.dark,
-              padding: 5,
+              padding: 5, flex:1,
               ...FONTS.h6,
             }}
-          >
-            {user && user.district}
+          >{user && user.district}
           </Text>
+          </View>
         </View>
 
         <View style={{ flexDirection: "row", marginVertical: 20 }}>

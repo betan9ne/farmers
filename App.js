@@ -4,7 +4,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import Tabs from "./navigation/tabs";
 import firebase_ from "./firebase";
-import {Text, View} from 'react-native'
 import AddProduct from "./comp/profile/AddProduct";
 import ManageProducts from "./comp/profile/ManageProducts";
 import ViewProduct from "./comp/profile/ViewProduct";
@@ -13,7 +12,7 @@ import ViewProduce from "./comp/explore/ViewProduce";
 import Signin from "./comp/signin/Signin";
 import Signup from "./comp/signin/Signup";
 import Welcome from "./comp/signin/Welcome";
-import Test from "./comp/signin/Test";
+
 import Inquiry from "./comp/orders/Inquiry";
 import EditProduct from "./comp/profile/EditProduct";
 import { View, Text } from "react-native";

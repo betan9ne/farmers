@@ -21,7 +21,8 @@ function Search() {
     const[status, setStatus] = useState(false)
     const[tag, setTag] = useState(0)
     let searchResults =  useSearch(search, tag).docs
-     
+    const[filteredResults, setFiltered] = useState([]) 
+
     function takeFocus(){
         searchBOx.current.focus()
         setStatus(true)
@@ -33,12 +34,28 @@ function Search() {
     function searchStuff(value){
         setSearch(searchBOx.current.value)
         setTag(value) 
-        filtered = searchdata.filter(value=>{
-            console.log(value.produce)
-            return value.produce.match(new RegExp(search, 'g')) ||
-            value.produce_category.match(new RegExp(search, 'g'))
+        
+      searchdata &&  searchdata.filter((val)=>{
+            if(search == "")
+            {
+                console.log("nothing")
+            }
+            else if(searchdata && 
+                (val.produce+"").toLowerCase().includes(search.toLowerCase()) ||
+                (val.produce_category+"").toLowerCase().includes(search.toLowerCase()))
+                {
+                filtered.push(val)
+                return  val
+            }        
         })
+        setFiltered(filtered)
         console.log(filtered)
+        // filtered = searchdata.filter(value=>{
+        //     console.log(value.produce)
+        //     return value.produce.match(new RegExp(search, 'g')) ||
+        //     value.produce_category.match(new RegExp(search, 'g'))
+        // })
+       
     }
 
     //from the tag cloud
@@ -90,16 +107,16 @@ function Search() {
     </View>
     <ScrollView style={{backgroundColor:COLORS.white, height:SIZES.height-120, marginBottom:0, paddingBottom:90}}>
             {
-                searchResults.length !== 0 ? 
+              filteredResults &&  filteredResults.length !== 0 ? 
                 <View>
                     <View style={{flexDirection:'row', paddingHorizontal:20}}>
-                    <Text style={{flex:1, ...FONTS.h5}}>{searchResults.length} {search} results</Text>
-                    <TouchableOpacity style={{flex:1, }} onPress={()=>setSearch(null)}
+                    <Text style={{flex:1, ...FONTS.h5}}>{filteredResults.length} {search} results</Text>
+                    <TouchableOpacity style={{flex:1, }} onPress={()=>setFiltered(null)}
                     ><Text style={{textAlign:"right", padding: 5, borderColor:COLORS.lightGray, borderRadius:5, borderWidth:0.2}}>Clear Search</Text></TouchableOpacity>
                     </View>
                     
                 <FlatList
-                    data={searchResults}
+                    data={filteredResults}
                     vertical
                     showsHorizontalScrollIndicator={false}               
                         keyExtractor={item => `${item.id}`}

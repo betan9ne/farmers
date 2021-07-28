@@ -56,10 +56,10 @@ const updateProfile = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <Image
+      {/* <Image
         source={require("./../../assets/profile.png")}
         style={styles.image}
-      />
+      /> */}
       <Text style={styles.txth1}>Lets update your profile</Text>
       <Text style={styles.txth2}>
         {" "}
@@ -137,10 +137,12 @@ const updateProfile = ({ route }) => {
         </View>
       </View>
 
-      {/* </ImageBackground> */}
-      <TouchableOpacity style={styles.button1} onPress={update}>
-        <Text style={styles.buttonText1}>Save</Text>
-      </TouchableOpacity>
+      <TouchableOpacity style={{backgroundColor:COLORS.black, marginTop:40, borderRadius:10, paddingHorizontal:30, paddingVertical:20}} 
+      onPress={()=>update()}>
+            <Text style={{color:COLORS.white, textAlign:"right", ...FONTS.h4}}>Update Profile</Text>
+      </TouchableOpacity>  
+
+      
     </View>
   );
 };
@@ -149,9 +151,9 @@ const styles = StyleSheet.create({
   container: {
     width: SIZES.width,
     height: SIZES.height,
-    alignItems: "center",
-    justifyContent: "center",
+    padding:SIZES.padding*2,
     backgroundColor: "white",
+    marginBottom:10,
   },
   buttonText1: {
     textAlign: "left",
@@ -204,18 +206,18 @@ const styles = StyleSheet.create({
   txth2: {
     ...FONTS.h5,
     width: "60%",
-    textAlign: "center",
+    textAlign: "left",
     marginBottom: "10%",
     marginTop: "5%",
   },
   txth3: {
-    ...FONTS.h4,
-    textAlign: "center",
+    ...FONTS.h5,
+    textAlign: "left",
   },
   input: {
     padding: 10,
     borderRadius: 10,
-    textAlign: "center",
+    textAlign: "left",
   },
 });
 
