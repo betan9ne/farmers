@@ -123,12 +123,11 @@ function Explore() {
       >
         <Text style={{ ...FONTS.h2, padding: SIZES.padding }}>Explore</Text>
 
-<<<<<<< HEAD
         <View style={{ marginTop: 30 }}>
           <Text style={{ ...FONTS.h4, marginBottom: 20 }}>Spotlight</Text>
           {farmers && (
             <FlatList
-              data={farmers.slice(0, 10)}
+              data={farmers}
               horizontal
               showsHorizontalScrollIndicator={false}
               keyExtractor={(item) => `${item.id}`}
@@ -137,20 +136,6 @@ function Explore() {
             />
           )}
         </View>
-=======
-            <View style={{marginTop:30}}>
-                 <Text style={{...FONTS.h4, marginBottom:20}}>Spotlight</Text>
-                {farmers &&  <FlatList
-            data={farmers}
-            horizontal
-            showsHorizontalScrollIndicator={false}               
-                keyExtractor={item => `${item.id}`}
-                renderItem={renderFarmers}
-                contentContainerStyle={{                    
-                }}
-            />  }
-            </View>
->>>>>>> dbb5d9676f23be431068bfe8ba22b65321fb0661
 
         <View style={{ marginTop: 30 }}>
           {
