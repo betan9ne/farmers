@@ -13,7 +13,6 @@ import useGetAllProducts from '../crud/useGetAllProducts'
 function Search() {
 
     let categories = useGetCategories().docs
-    
     const searchBOx = useRef()
     const searchButton = useRef()
     const navigation = useNavigation()
@@ -88,7 +87,7 @@ function Search() {
     
 
     const renderSearchItem = ({ item }) => (           
-        <TouchableOpacity  onPress={()=>navigation.navigate("viewProduce",{item})} style={{marginHorizontal:5,  backgroundColor:COLORS.white}}>
+        <TouchableOpacity  onPress={()=>navigation.navigate("viewProduce",{item})} style={{paddingVertical:10,marginHorizontal:5, marginVertical:5, borderColor:COLORS.lightGray, borderRadius:10, backgroundColor:COLORS.white, borderWidth:0.4}}>
            <SearchItem data={item} />
         </TouchableOpacity>
     )

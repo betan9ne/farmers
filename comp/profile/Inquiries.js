@@ -44,13 +44,16 @@ function Inquiries(props) {
       <TouchableOpacity style={styles.button1}>
         <Text style={styles.buttonText1}>Accept</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.button2}>
+        <Text style={styles.buttonText2}>Deny</Text>
+      </TouchableOpacity>
     </TouchableOpacity>
   );
 
   return (
     <View style={{ padding: SIZES.padding * 2, height: SIZES.height }}>
       <Text style={{ ...FONTS.h5, marginVertical: 10 }}>
-        You can view, edit and delete your items from here
+        You can accept or deny your incoming requests from here
       </Text>
       {inquiries && (
         <FlatList
@@ -79,6 +82,21 @@ const styles = StyleSheet.create({
   },
   buttonText1: {
     color: COLORS.white,
+    textAlign: "center",
+  },
+  button2: {
+    width: "20%",
+    marginLeft: "35%",
+    marginTop: 10,
+    textAlign: "center",
+    borderRadius: 5,
+    bottom: 0,
+    backgroundColor: COLORS.primary,
+    padding: SIZES.padding * 1,
+  },
+  buttonText2: {
+    color: COLORS.white,
+    textAlign: "center",
   },
 });
 

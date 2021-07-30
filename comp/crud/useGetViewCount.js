@@ -7,7 +7,7 @@ const useGetViewCount  =(id) => {
     let counter = 0
     React.useEffect(() => {     
             let data = []
-      firebase.firestore().collection("products").where("u_id","==",id).onSnapshot((doc)=>{   
+      const unsub =  firebase.firestore().collection("products").where("u_id","==",id).get().then((doc)=>{   
           doc.docs.forEach(e=>{
               let asd = {
                   id: e.id,
@@ -17,7 +17,7 @@ const useGetViewCount  =(id) => {
           })     
         setDocs(data)        
       })     
-    }, [id])
+    }, [])
     
   docs &&  docs.forEach(e=>{       
         counter = counter + e.views

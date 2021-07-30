@@ -91,10 +91,6 @@ const renderDistricts = ({item})=>{
 
   return (
     <ScrollView style={styles.container}>
-      {/* <Image
-        source={require("./../../assets/profile.png")}
-        style={styles.image}
-      /> */}
       <Text style={styles.txth1}>Lets update your profile</Text>
       <Text style={styles.txth2}>
         {" "}
@@ -211,7 +207,7 @@ const styles = StyleSheet.create({
   txth2: {
     ...FONTS.h5,
     width: "60%",
-    textAlign: "left",
+    textAlign: "center",
     marginBottom: "10%",
     marginTop: "5%",
   },

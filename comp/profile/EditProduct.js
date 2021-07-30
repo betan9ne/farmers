@@ -77,6 +77,7 @@ const EditProduct = ({ route }) => {
     let asd = {
       updatedAt: new Date(Date.now()).toString(),
       price: price,
+      items: items,
       delivery: delivery,
     };
     firebase
@@ -89,18 +90,6 @@ const EditProduct = ({ route }) => {
       });
   }
 
-    function updateProduce(){
-        let asd = {
-            updatedAt: new Date(Date.now()).toString(),
-            price: price,
-            items:items,
-            delivery: delivery,             
-        }
-        firebase.firestore().collection("products").doc(data.id)
-        .update(asd).then(()=>{
-            navigation.navigate("manageProduct")
-        })
-    }
   return (
     <ScrollView style={{ backgroundColor: COLORS.white, flex: 1 }}>
       <View
