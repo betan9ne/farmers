@@ -117,7 +117,7 @@ function Explore() {
       <View
         style={{
           padding: SIZES.padding * 2,
-          height: "100%",
+          paddingBottom:80,
           backgroundColor: COLORS.white,
         }}
       >

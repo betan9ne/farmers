@@ -32,8 +32,8 @@ function profile() {
       style={{
         padding: SIZES.padding,
         backgroundColor: COLORS.white,
-        marginBottom: 80,
-        paddingBottom: 90,
+        marginBottom: 60,
+        paddingBottom: 10,
       }}
     >
       <View style={{ padding: SIZES.padding * 2, height: 60 }}>

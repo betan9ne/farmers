@@ -22,7 +22,6 @@ function Inquiries(props) {
       //   onPress={() => navigation.navigate("inquiries", { item })}
       style={{
         paddingVertical: 10,
-        width: SIZES.width,
         borderRadius: 10,
         marginVertical: 10,
         backgroundColor: COLORS.white,
@@ -32,21 +31,23 @@ function Inquiries(props) {
       >{item.produce}
       </Text>
       <View style={{flexDirection:"row"}}>
-          <Text style={{flex:1, paddingHorizontal: 20, ...FONTS.h6, color: COLORS.darkgray }}
+          <Text style={{flex:1, paddingHorizontal: 20, ...FONTS.h5, color: COLORS.darkgray }}
           >Quantity: {item.quant}</Text>
-          <Text style={{flex:1, paddingHorizontal: 20, ...FONTS.h6, color: COLORS.darkgray }}
+          <Text style={{flex:1, paddingHorizontal: 20, ...FONTS.h5, color: COLORS.darkgray }}
           >Price:{item.price}</Text>
       </View>      
       <Text
-        style={{ paddingHorizontal: 20, ...FONTS.h6, color: COLORS.darkgray }}
+        style={{ paddingHorizontal: 20, ...FONTS.h5, color: COLORS.darkgray }}
       >Request sent on {item.createdAt.slice(0, 16)}
       </Text>
+      <View style={{flexDirection:"row"}}>
       <TouchableOpacity style={styles.button1}>
         <Text style={styles.buttonText1}>Accept</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button2}>
         <Text style={styles.buttonText2}>Deny</Text>
       </TouchableOpacity>
+      </View>
     </TouchableOpacity>
   );
 
@@ -57,7 +58,7 @@ function Inquiries(props) {
       </Text>
       {inquiries && (
         <FlatList
-          data={inquiries.slice(0, 5)}
+          data={inquiries}
           vertical
           showsVerticalScrollIndicator={false}
           keyExtractor={(item) => `${item.id}`}
@@ -71,28 +72,29 @@ function Inquiries(props) {
 
 const styles = StyleSheet.create({
   button1: {
-    width: "20%",
-    marginLeft: "35%",
+    marginHorizontal:10,
     marginTop: 10,
+    flex:1,
+    ...FONTS.h4,
     textAlign: "center",
     borderRadius: 5,
-    bottom: 0,
     backgroundColor: COLORS.secondary,
-    padding: SIZES.padding * 1,
+    padding: SIZES.padding,
   },
   buttonText1: {
     color: COLORS.white,
     textAlign: "center",
   },
   button2: {
-    width: "20%",
-    marginLeft: "35%",
+    marginHorizontal:10,
     marginTop: 10,
+    flex:1,
+    ...FONTS.h4,
     textAlign: "center",
     borderRadius: 5,
-    bottom: 0,
+   
     backgroundColor: COLORS.primary,
-    padding: SIZES.padding * 1,
+    padding: SIZES.padding,
   },
   buttonText2: {
     color: COLORS.white,
