@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react'
-import {Text, View,  TouchableOpacity, ScrollView, StyleSheet, Modal, Image, FlatList} from 'react-native'
+import {Text, View, Alert,  TouchableOpacity, ScrollView, StyleSheet, Modal, Image, FlatList} from 'react-native'
 import firebase from '../../firebase'
 import { SIZES, FONTS, COLORS } from "../../constants"
 import {useNavigation} from '@react-navigation/native'
@@ -17,9 +17,10 @@ const ViewProduct = ({route}) => {
     const [uploading, setUploading] = useState(false);
     const[uploadUrl, setImageUrl] = useState()
     const[progress, setProgress] = useState(0)
+
     function DeleteItem()
     {
-        firebase.firestore().collection("products").doc(data.id).delete().then(()=>{            
+       firebase.firestore().collection("products").doc(data.id).delete().then(()=>{            
             console.log("deleted")
             navigation.goBack()
         })    

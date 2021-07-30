@@ -27,26 +27,19 @@ function Inquiries(props) {
         marginVertical: 10,
         backgroundColor: COLORS.white,
       }}
-    >
-      <Text
+    ><Text
         style={{ paddingHorizontal: 20, ...FONTS.h4, color: COLORS.secondary }}
-      >
-        {item.produce}
+      >{item.produce}
       </Text>
+      <View style={{flexDirection:"row"}}>
+          <Text style={{flex:1, paddingHorizontal: 20, ...FONTS.h6, color: COLORS.darkgray }}
+          >Quantity: {item.quant}</Text>
+          <Text style={{flex:1, paddingHorizontal: 20, ...FONTS.h6, color: COLORS.darkgray }}
+          >Price:{item.price}</Text>
+      </View>      
       <Text
         style={{ paddingHorizontal: 20, ...FONTS.h6, color: COLORS.darkgray }}
-      >
-        Quantity: {item.quant}
-      </Text>
-      <Text
-        style={{ paddingHorizontal: 20, ...FONTS.h6, color: COLORS.darkgray }}
-      >
-        Price: {item.price}
-      </Text>
-      <Text
-        style={{ paddingHorizontal: 20, ...FONTS.h6, color: COLORS.darkgray }}
-      >
-        Time: {item.createdAt.slice(0, 16)}
+      >Request sent on {item.createdAt.slice(0, 16)}
       </Text>
       <TouchableOpacity style={styles.button1}>
         <Text style={styles.buttonText1}>Accept</Text>

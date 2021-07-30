@@ -7,13 +7,14 @@ import {
   Image,
   TextInput,
   StyleSheet,
+  FlatList,
   ScrollView,
   Alert,
 } from "react-native";
 import firebase from "../../firebase";
 import { SIZES, FONTS, COLORS } from "../../constants";
 import { useNavigation } from "@react-navigation/native";
-import useGetUser from "../crud/useGetUser";
+import locations from '../explore/locations'
 
 const updateProfile = ({ route }) => {
   const navigation = useNavigation();
@@ -29,9 +30,12 @@ const updateProfile = ({ route }) => {
   const [district, setdistrict] = useState(user.district);
   const [province, setprovince] = useState(user.province);
   const [type, setusertype] = useState(user.type);
-
+  const[districts, setDistricts] = useState([])
   // function to request for a verification code
   let userId = firebase.auth().currentUser.uid;
+
+  let genderTypes = ["Male", "Female"]
+  let userType = ["Buyer", "Seller", "Shop", "Transporter"]
   const update = () => {
     // do something amazing
 
@@ -54,8 +58,39 @@ const updateProfile = ({ route }) => {
     console.log("update happened");
   };
 
+  const getDistricts = (item) =>{
+    setDistricts(item.districts)
+    setprovince(item.province)
+}
+
+const renderGender = ({ item }) => (             
+  <TouchableOpacity onPress={()=>setgender(item)} style={{paddingVertical:10,marginHorizontal:5, borderRadius:10,
+   backgroundColor:user.gender === item ? COLORS.secondary : COLORS.black}}>
+    <Text style={{paddingHorizontal:20, color:COLORS.white, ...FONTS.h5}}>{item}</Text></TouchableOpacity>
+  )
+
+  const renderType = ({ item }) => (             
+    <TouchableOpacity onPress={()=>setusertype(item)} style={{paddingVertical:10,marginHorizontal:5, borderRadius:10,
+     backgroundColor:user.type === item ? COLORS.secondary : COLORS.black}}>
+      <Text style={{paddingHorizontal:20, color:COLORS.white, ...FONTS.h5}}>{item}</Text></TouchableOpacity>
+    )
+
+const renderItem = ({ item }) => (             
+<TouchableOpacity onPress={()=>getDistricts(item)} style={{paddingVertical:10,marginHorizontal:5, borderRadius:10, 
+  backgroundColor:user.province === item.province ? COLORS.secondary : COLORS.black}}>
+  <Text style={{paddingHorizontal:20, color:COLORS.white, ...FONTS.h5}}>{item.province}</Text></TouchableOpacity>
+)
+
+const renderDistricts = ({item})=>{       
+  return(
+  <TouchableOpacity onPress={()=>setdistrict(item)} style={{paddingVertical:10,marginHorizontal:5, borderRadius:10, 
+  backgroundColor:user.district === item ? COLORS.secondary : COLORS.black}}>
+    <Text style={{paddingHorizontal:20, color:COLORS.white, ...FONTS.h5}}>{item}</Text></TouchableOpacity>
+  )  
+}
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {/* <Image
         source={require("./../../assets/profile.png")}
         style={styles.image}
@@ -90,70 +125,66 @@ const updateProfile = ({ route }) => {
           />
 
           <Text style={styles.txth3}>Gender</Text>
-          <TextInput
-            keyboardType="default"
-            placeholder="Male"
-            placeholderTextColor={COLORS.Gray}
-            style={styles.input}
-            autoCompleteType="name"
-            onChangeText={setgender}
-            defaultValue={user && user.gender}
-          />
-        </View>
-
-        <View style={styles.altContainer}>
+          <FlatList
+            data={genderTypes}
+            horizontal
+            showsHorizontalScrollIndicator={false}               
+                keyExtractor={item => `${item}`}
+                renderItem={renderGender}
+                contentContainerStyle={{                    
+                }}
+            />  
+      
           <Text style={styles.txth3}>Province</Text>
-          <TextInput
-            keyboardType="default"
-            placeholder="Lusaka / Ndola"
-            placeholderTextColor={COLORS.Gray}
-            style={styles.input}
-            autoCompleteType="name"
-            onChangeText={setprovince}
-            defaultValue={user && user.province}
-          />
-
+          {locations &&  <FlatList
+            data={locations}
+            horizontal
+            showsHorizontalScrollIndicator={false}               
+                keyExtractor={item => `${item.province}`}
+                renderItem={renderItem}
+                contentContainerStyle={{                    
+                }}
+            />  }
+      
           <Text style={styles.txth3}>District</Text>
-          <TextInput
-            keyboardType="default"
-            placeholder="Lusaka / kabombo"
-            placeholderTextColor={COLORS.Gray}
-            style={styles.input}
-            autoCompleteType="name"
-            onChangeText={setdistrict}
-            defaultValue={user && user.district}
-          />
-
+          {districts ?  <FlatList
+            data={districts}
+            horizontal
+            showsHorizontalScrollIndicator={false}               
+                keyExtractor={item => `${item}`}
+                renderItem={renderDistricts}
+                contentContainerStyle={{                    
+                }}
+            /> : <Text>Select a province to view districts</Text> }
+        
           <Text style={styles.txth3}>User type</Text>
-          <TextInput
-            keyboardType="default"
-            placeholder="Buyer / seller / Transport / Store"
-            placeholderTextColor={COLORS.Gray}
-            style={styles.input}
-            autoCompleteType="name"
-            onChangeText={setusertype}
-            defaultValue={user && user.type}
-          />
+          <FlatList
+            data={userType}
+            horizontal
+            showsHorizontalScrollIndicator={false}               
+                keyExtractor={item => `${item}`}
+                renderItem={renderType}
+                contentContainerStyle={{                    
+                }}
+            />  
         </View>
       </View>
 
-      <TouchableOpacity style={{backgroundColor:COLORS.black, marginTop:40, borderRadius:10, paddingHorizontal:30, paddingVertical:20}} 
+      <TouchableOpacity style={{backgroundColor:COLORS.black, marginBottom:20, marginTop:40, borderRadius:10, paddingHorizontal:30, paddingVertical:20}} 
       onPress={()=>update()}>
             <Text style={{color:COLORS.white, textAlign:"right", ...FONTS.h4}}>Update Profile</Text>
       </TouchableOpacity>  
-
-      
-    </View>
+      </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     width: SIZES.width,
-    height: SIZES.height,
-    padding:SIZES.padding*2,
-    backgroundColor: "white",
-    marginBottom:10,
+    paddingHorizontal:SIZES.padding*2,
+     backgroundColor: "white",
+    marginBottom:0,
+    paddingBottom:30
   },
   buttonText1: {
     textAlign: "left",
@@ -161,33 +192,7 @@ const styles = StyleSheet.create({
   buttonText2: {
     textAlign: "right",
   },
-  miniContainer: {
-    padding: SIZES.padding * 2,
-    position: "absolute",
-    flexDirection: "row",
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
-  detailsContainer: {
-    padding: SIZES.padding * 2,
-    flexDirection: "row",
-    left: 0,
-    right: 0,
-  },
-  personalContainer: {
-    flex: 0.5,
-    textAlign: "left",
-    backgroundColor: "white",
-    // padding: SIZES.padding * 2,
-  },
-  altContainer: {
-    flex: 0.5,
-    textAlign: "left",
-    backgroundColor: "white",
-    // padding: SIZES.padding * 2,
-  },
-  button1: {
+   button1: {
     flex: 0.5,
     // textAlign: "left",
     backgroundColor: "white",
@@ -213,11 +218,14 @@ const styles = StyleSheet.create({
   txth3: {
     ...FONTS.h5,
     textAlign: "left",
+    marginTop:10,
   },
   input: {
     padding: 10,
     borderRadius: 10,
     textAlign: "left",
+    borderWidth:0.5,
+    borderColor:COLORS.dark2
   },
 });
 

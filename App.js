@@ -18,6 +18,7 @@ import EditProduct from "./comp/profile/EditProduct";
 import { View, Text } from "react-native";
 import updateProfile from "./comp/profile/UpdateProfile";
 import Inquiries from "./comp/profile/Inquiries";
+import Vendors from "./comp/explore/Vendors";
 
 const Stack = createStackNavigator();
 
@@ -95,6 +96,11 @@ const App = () => {
           name="addProduct"
           component={AddProduct}
           options={{ headerShown: true, title: "Add Product" }}
+        />
+        <Stack.Screen
+          name="vendors"
+          component={Vendors}
+          options={{ headerShown: true, title: "" }}
         />
         <Stack.Screen
           name="editProduct"

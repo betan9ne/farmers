@@ -46,7 +46,7 @@ function Explore() {
             <View style={{marginTop:30}}>
                  <Text style={{...FONTS.h4, marginBottom:20}}>Spotlight</Text>
                 {farmers &&  <FlatList
-            data={farmers}
+            data={farmers.slice(0,5)}
             horizontal
             showsHorizontalScrollIndicator={false}               
                 keyExtractor={item => `${item.id}`}
@@ -54,6 +54,9 @@ function Explore() {
                 contentContainerStyle={{                    
                 }}
             />  }
+            <TouchableOpacity style={{marginTop:10,}} onPress={()=>navigation.navigate("vendors")}>
+                <Text style={{backgroundColor:COLORS.white, color:COLORS.black, borderWidth:0.2, borderColor:COLORS.black, paddingHorizontal:SIZES.padding*2, paddingVertical: 10, borderRadius:10, ...FONTS.h5, alignSelf:"flex-end"}}>View All</Text>
+            </TouchableOpacity>
             </View>
 
             <View style={{marginTop:30}}>

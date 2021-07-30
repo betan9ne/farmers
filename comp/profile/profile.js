@@ -70,6 +70,7 @@ function profile() {
               marginHorizontal: 10,
               color: COLORS.dark,
               padding: 5, flex:1,
+              textAlign:"center",
               ...FONTS.h6,
             }}
           >
@@ -80,6 +81,7 @@ function profile() {
               fontWeight: "900",
               marginHorizontal: 10,
               color: COLORS.dark,
+              textAlign:"center",
               padding: 5, flex:1,
               ...FONTS.h6,
             }}
