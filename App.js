@@ -19,6 +19,7 @@ import { View, Text } from "react-native";
 import updateProfile from "./comp/profile/UpdateProfile";
 import Inquiries from "./comp/profile/Inquiries";
 import Vendors from "./comp/explore/Vendors";
+import Feedback from "./comp/profile/Feedback";
 
 const Stack = createStackNavigator();
 
@@ -126,6 +127,11 @@ const App = () => {
           name="userProfile"
           component={UserProfile}
           options={{ headerShown: true, title: "Profile" }}
+        />
+         <Stack.Screen
+          name="feedback"
+          component={Feedback}
+          options={{ headerShown: true, title: "Send feedback" }}
         />
         <Stack.Screen
           name="updateProfile"

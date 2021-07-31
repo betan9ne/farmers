@@ -159,8 +159,7 @@ function profile() {
             alignItems: "center",
             backgroundColor: COLORS.secondary,
           }}
-        >
-          <Text
+        ><Text
             style={{
               color: COLORS.white,
               ...FONTS.h4,
@@ -168,8 +167,7 @@ function profile() {
               textAlign: "center",
               fontWeight: "900",
             }}
-          >
-            <Feather name="plus" size={24} color="white" />
+          ><Feather name="plus" size={24} color="white" />
             {"\n\n"}Add Product
           </Text>
         </TouchableOpacity>
@@ -186,8 +184,7 @@ function profile() {
             alignItems: "center",
             backgroundColor: COLORS.black,
           }}
-        >
-          <Text
+        ><Text
             style={{
               color: COLORS.white,
               ...FONTS.h4,
@@ -195,8 +192,7 @@ function profile() {
               textAlign: "center",
               fontWeight: "900",
             }}
-          >
-            <Feather name="user" size={24} color="white" />
+          ><Feather name="user" size={24} color="white" />
             {"\n\n"}Update Profile
           </Text>
         </TouchableOpacity>
@@ -220,8 +216,7 @@ function profile() {
               alignItems: "center",
               backgroundColor: COLORS.black,
             }}
-          >
-            <Text
+          ><Text
               style={{
                 color: COLORS.white,
                 ...FONTS.h4,
@@ -238,6 +233,32 @@ function profile() {
       </View>
 
       <View style={{ flexDirection: "row", marginVertical: 5 }}>
+
+        <TouchableOpacity
+         onPress={() => navigation.navigate("feedback")}
+          style={{
+            flex: 1,
+            marginHorizontal: 5,
+            borderRadius: 10,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: COLORS.black,
+          }}
+        ><Text
+            style={{
+              color: COLORS.white,
+              ...FONTS.h4,
+              padding: SIZES.padding * 4,
+              textAlign: "center",
+              fontWeight: "900",
+            }}
+          > <Feather name="list" size={24} color="white" />
+            {"\n\n"}Feedback
+          </Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={{ flexDirection: "row", marginVertical: 5 }}>
         <View
           style={{
             flex: 1,
@@ -247,8 +268,7 @@ function profile() {
             alignItems: "center",
             backgroundColor: COLORS.black,
           }}
-        >
-          <Text
+        ><Text
             style={{
               color: COLORS.white,
               ...FONTS.h4,
@@ -256,8 +276,7 @@ function profile() {
               textAlign: "center",
               fontWeight: "900",
             }}
-          >
-            <Feather name="info" size={24} color="white" />
+          ><Feather name="info" size={24} color="white" />
             {"\n\n"}About FStore
           </Text>
         </View>
@@ -271,8 +290,7 @@ function profile() {
             alignItems: "center",
             backgroundColor: COLORS.dark,
           }}
-        >
-          <Text
+        ><Text
             style={{
               color: COLORS.white,
               ...FONTS.h4,
@@ -280,8 +298,7 @@ function profile() {
               textAlign: "center",
               fontWeight: "900",
             }}
-          >
-            <Feather name="log-out" size={24} color="white" />
+          ><Feather name="log-out" size={24} color="white" />
             {"\n\n"}Logout
           </Text>
         </TouchableOpacity>
