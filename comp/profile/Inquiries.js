@@ -48,7 +48,7 @@ function Inquiries() {
         }        
     })
     setPending(_pending)   
-    console.log("here")   
+ 
 }
 
 const getAccptedItems = (value) =>{
@@ -61,7 +61,7 @@ const getAccptedItems = (value) =>{
       }        
   })
   setAccepted(_accepted)   
-  console.log("here")   
+  
 }
 
 const getRejectedItems = (value) =>{
@@ -74,7 +74,7 @@ const getRejectedItems = (value) =>{
       }        
   })
   setRejected(_rejected)   
-  console.log("here")   
+  
 }
 //console.log(_pending, inquiries)
 

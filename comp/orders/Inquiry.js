@@ -28,11 +28,32 @@ const Inquiry = ({ route }) => {
       .add(inquiry)
       .then(() => {
         console.log("Inquiry sent");
+        sendPushNotification(user.token)
         navigation.goBack();
       })
       .catch((e) => {
         console.log(e);
       });
+  }
+
+  async function sendPushNotification(expoPushToken) {
+    const message = {
+      to: expoPushToken,
+      sound: 'default',
+      title: "Inquiry",
+      body: `You have an inquiry for` + bags+ " of " + data.produce,
+      data: { someData: 'goes here' },
+    };
+  
+    await fetch('https://exp.host/--/api/v2/push/send', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Accept-encoding': 'gzip, deflate',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(message),
+    });
   }
 
   return (

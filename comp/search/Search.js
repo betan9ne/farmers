@@ -6,7 +6,7 @@ import {Feather} from "@expo/vector-icons"
 import {useNavigation} from '@react-navigation/native'
 import useGetCategories from '../crud/useGetCategories'
 import SearchItem from './SearchItem'
-import useSearch from '../crud/useSearch'
+ 
 import useGetAllProducts from '../crud/useGetAllProducts'
 
 
