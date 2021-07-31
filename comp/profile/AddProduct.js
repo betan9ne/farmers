@@ -10,6 +10,8 @@ import uuid from "uuid"
 function AddProduct() {
     const[price, setPrice]= useState(null)
     const[items, setItems]= useState(null)
+    const[quantity, setQuantity]= useState(null)
+    const[unit, setUnit]= useState(null)
     const[delivery, setDelivery]= useState(null)
     const[doc, setDocs] = useState(null)
     const[subItems, setSubItems] = useState(null)
@@ -21,6 +23,8 @@ function AddProduct() {
     const [image, setImage] = useState(null);
     const [uploading, setUploading] = useState(false);
     const[uploadUrl, setImageUrl] = useState()
+
+  let unitOfMeasure = ["Kilogram","Grams","Liters", "Mililiters","Per Head", "Box"]
 
     const navigation = useNavigation()
 
@@ -118,7 +122,9 @@ function AddProduct() {
                 price: price,
                 items: items,
                 delivery: delivery, 
-                images:url,              
+                images:url,  
+                unit:unit,
+                quantity:quantity,            
                 u_id:firebase.auth().currentUser.uid,
             }
             firebase.firestore().collection("products").add(asd).then(()=>{
@@ -138,12 +144,18 @@ function AddProduct() {
     }
 
     const renderItem = ({ item }) => (           
-        <TouchableOpacity onPress={()=>displayItems(item)} style={{paddingVertical:10,marginHorizontal:5, borderRadius:10, backgroundColor:COLORS.black}}>
+        <TouchableOpacity onPress={()=>displayItems(item)} style={{paddingVertical:10,marginHorizontal:5, borderRadius:10, backgroundColor:item.name === ItemName ? COLORS.secondary : COLORS.black}}>
             <Text style={{paddingHorizontal:20, color:COLORS.white}}>{item.name}</Text>
         </TouchableOpacity>
     )
+
+    const renderUnit = ({ item }) => (           
+      <TouchableOpacity onPress={()=>setUnit(item)} style={{paddingVertical:10,marginHorizontal:5, borderRadius:10, backgroundColor:item === unit ? COLORS.secondary : COLORS.black}}>
+          <Text style={{paddingHorizontal:20, color:COLORS.white}}>{item}</Text>
+      </TouchableOpacity>
+  )
     const renderSubItem = ({ item }) => (           
-        <TouchableOpacity onPress={()=>setSubItem(item)} style={{paddingVertical:10,marginHorizontal:5, borderRadius:10, backgroundColor:COLORS.lightGray}}>
+        <TouchableOpacity onPress={()=>setSubItem(item)} style={{paddingVertical:10,marginHorizontal:5, borderRadius:10, backgroundColor: item === subItem ? COLORS.white : COLORS.lightGray}}>
             <Text style={{paddingHorizontal:20, color:COLORS.black}}>{item}</Text>
         </TouchableOpacity>
     )
@@ -157,7 +169,7 @@ function AddProduct() {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={{...FONTS.h4}}>Thank you, we are adding details to the database</Text>
+            <Text style={{...FONTS.h4, textAlign:"center"}}>Thank you, we are adding details to the database</Text>
             <Text style={{textAlign:"center", ...FONTS.h6}}>Please do not leave the page until upload is complete and prompt will disappear</Text>
               </View>
         </View>
@@ -188,7 +200,19 @@ function AddProduct() {
             />  }
                 <Text style={{...FONTS.h5, marginVertical:10}}>Add Cover image</Text>
                 <TouchableOpacity onPress={()=>pickImage()} style={{borderRadius:10,paddingVertical:10, marginHorizontal:5, backgroundColor:COLORS.black}}><Text style={{color:COLORS.white, textAlign:"center", padding:SIZES.padding, ...FONTS.h5}}>Add Images</Text></TouchableOpacity> 
-                <Text style={{...FONTS.h4, marginTop:10, color:COLORS.white}}>Price</Text>
+                <Text style={{...FONTS.h5, marginTop:10, color:COLORS.black}}>Quantity</Text>
+                <TextInput keyboardType="number-pad" placeholder="How many per unit" onChangeText={(value)=>setQuantity(value)} style={{padding: SIZES.padding*2, }} />
+                <Text style={{...FONTS.h5, marginTop:10, color:COLORS.black, marginBottom:10}}>Unit of Measure</Text>
+                <FlatList
+            data={unitOfMeasure}
+            horizontal
+            showsHorizontalScrollIndicator={false}               
+                keyExtractor={item => `${item}`}
+                renderItem={renderUnit}
+                contentContainerStyle={{                    
+                }}
+            /> 
+                <Text style={{...FONTS.h5, marginTop:10, color:COLORS.black}}>Price</Text>
                 <TextInput keyboardType="number-pad" placeholder="How much does it cost" onChangeText={(value)=>setPrice(value)} style={{padding: SIZES.padding*2,}} />
                 <Text style={{...FONTS.h5, marginTop:10}}>Items Available</Text>
                 <TextInput keyboardType="number-pad" placeholder="What do you have available" onChangeText={(value)=>setItems(value)} style={{padding: SIZES.padding*2,}} />

@@ -103,6 +103,7 @@ const ViewProduce = ({ route }) => {
             {data.delivery === "0" ? "Stationary" : "Mobile"}
           </Text>
           <View style={{ flexDirection: "row", marginVertical: 20 }}>
+            {data.u_id === firebase.auth().currentUser.uid ? null :
             <TouchableOpacity
               onPress={() => navigation.navigate("inquire", { data })}
               style={{
@@ -124,6 +125,7 @@ const ViewProduce = ({ route }) => {
               </Text>
               {/* need to make this change depending on whether the current user is the one that uploaded it. */}
             </TouchableOpacity>
+            }
           </View>
         </View>
 

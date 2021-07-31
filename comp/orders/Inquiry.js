@@ -11,6 +11,7 @@ const Inquiry = ({ route }) => {
   let user = useGetUser(data.u_id).docs;
   const [bags, setBags] = useState(null);
 
+  console.log(data)
   function sendInquiry() {
     let inquiry = {
       buyer: firebase.auth().currentUser.uid,
@@ -78,7 +79,7 @@ const Inquiry = ({ route }) => {
       <View style={{ padding: SIZES.padding }}>
         <Text style={{ ...FONTS.h4 }}>Make offer</Text>
         <Text>
-          My current price for 1KG of {data.produce} is ZMW {data.price} {"\n"}
+          My current price for {data.quantity} {data.unit} of {data.produce} is ZMW {data.price} {"\n"}
         </Text>
         <Text>How many bags of {data.produce} do you need?</Text>
         <TextInput

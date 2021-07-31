@@ -91,7 +91,7 @@ const renderDistricts = ({item})=>{
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.txth1}>Lets update your profile</Text>
+    
       <Text style={styles.txth2}>
         {" "}
         Feel free to edit and update your profile, infact we encourage it.
@@ -206,8 +206,8 @@ const styles = StyleSheet.create({
   },
   txth2: {
     ...FONTS.h5,
-    width: "60%",
-    textAlign: "center",
+   
+    textAlign: "left",
     marginBottom: "10%",
     marginTop: "5%",
   },
