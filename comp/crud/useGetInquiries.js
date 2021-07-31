@@ -5,7 +5,7 @@ const useGetInquiries = (id) => {
   const [docs, setDocs] = React.useState([]);
 
   let user = firebase.auth().currentUser.uid;
-  console.log(user);
+  // console.log(user);
 
   React.useEffect(() => {
     firebase

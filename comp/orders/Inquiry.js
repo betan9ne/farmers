@@ -19,6 +19,7 @@ const Inquiry = ({ route }) => {
       produce: data.produce,
       quant: bags,
       seller: data.u_id,
+      status: 0,
     };
     firebase
       .firestore()

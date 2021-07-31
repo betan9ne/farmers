@@ -43,6 +43,7 @@
     "plugins": [
       "expo-image-picker",
       "expo-notifications"
-    ]
+    ],
+    "description": "Variant96"
   }
 }

@@ -14,8 +14,8 @@ import useGetInquiries from "../crud/useGetInquiries";
 
 function Inquiries(props) {
   const navigation = useNavigation();
+
   let inquiries = useGetInquiries().docs;
-  console.log(inquiries);
 
   const renderInquiries = ({ item }) => (
     <TouchableOpacity
@@ -48,15 +48,22 @@ function Inquiries(props) {
       >
         Time: {item.createdAt.slice(0, 16)}
       </Text>
-      <TouchableOpacity style={styles.button1}>
-        <Text style={styles.buttonText1}>Accept</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button2}>
-        <Text style={styles.buttonText2}>Deny</Text>
-      </TouchableOpacity>
+      <View style={styles.btncontainer}>
+        <TouchableOpacity
+          onPress={() => updateInquiry()}
+          style={styles.button1}
+        >
+          <Text style={styles.buttonText1}>Accept</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => updateInquiry()}
+          style={styles.button2}
+        >
+          <Text style={styles.buttonText2}>Deny</Text>
+        </TouchableOpacity>
+      </View>
     </TouchableOpacity>
   );
-
   return (
     <View style={{ padding: SIZES.padding * 2, height: SIZES.height }}>
       <Text style={{ ...FONTS.h5, marginVertical: 10 }}>
@@ -77,9 +84,12 @@ function Inquiries(props) {
 }
 
 const styles = StyleSheet.create({
+  btncontainer: {
+    flexDirection: "row",
+  },
   button1: {
-    width: "20%",
-    marginLeft: "35%",
+    width: "30%",
+    marginLeft: "10%",
     marginTop: 10,
     textAlign: "center",
     borderRadius: 5,
@@ -92,13 +102,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   button2: {
-    width: "20%",
-    marginLeft: "35%",
+    width: "30%",
+    marginLeft: "10%",
     marginTop: 10,
     textAlign: "center",
     borderRadius: 5,
     bottom: 0,
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.black,
     padding: SIZES.padding * 1,
   },
   buttonText2: {
