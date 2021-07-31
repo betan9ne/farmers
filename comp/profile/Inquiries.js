@@ -13,13 +13,16 @@ import firebase from "../..//firebase";
 import useGetInquiries from "../crud/useGetInquiries";
 import {TabView, TabBar, SceneMap} from 'react-native-tab-view'
 import { ScrollView } from "react-native-gesture-handler";
+import useGetMyRequests from "../crud/useGetMyRequests";
 
 function Inquiries() {
   const navigation = useNavigation();
   let inquiries = useGetInquiries().docs;
+  let myRequests = useGetMyRequests().docs
   const[pending, setPending] = useState()
   const[accepted, setAccepted] = useState()
   const[rejected, setRejected] = useState()
+  const[requested, setRequested] = useState()
 
   function updateStatus(id, status){
     firebase.firestore().collection("inquires").doc(id).update({status:status}).then(()=>{
@@ -32,7 +35,7 @@ function Inquiries() {
   useEffect(() => {
     inquiries && getPendingItems("pending")
     inquiries && getAccptedItems("accepted")
-    inquiries && getRejectedItems("rejected")
+    inquiries && getRejectedItems("rejected")     
   }, [inquiries])
 
   let _pending = []
@@ -81,9 +84,10 @@ const getRejectedItems = (value) =>{
   const layout = useWindowDimensions()
   const[index, setINdex] = useState(0)
   const[routes]  =useState([
-    {key:'first', title:"Pending"},
+    {key:'first', title:"Recieved"},
     {key:'second', title:"Accepted"},
-    {key:'third', title:"Rejected"}
+    {key:'third', title:"Rejected"},
+    {key:'fourth', title:"Sent"}
   ])
 
   const renderInquiries = ({ item }) => (
@@ -119,6 +123,33 @@ const getRejectedItems = (value) =>{
       </TouchableOpacity>
       </View>
       : null}
+      <View style={{borderWidth:1, marginTop:10, borderColor:COLORS.lightGray}}></View>
+    </View>
+  );
+
+
+  const renderMyInquiries = ({ item }) => (
+    <View
+       style={{
+        paddingVertical: 10,
+        borderRadius: 10,
+        marginVertical: 10,
+        backgroundColor: COLORS.white,
+      }}
+    ><Text
+        style={{ paddingHorizontal: 10, ...FONTS.h4, color: COLORS.secondary }}
+      >{item.produce}
+      </Text>
+      <View style={{flexDirection:"row"}}>
+          <Text style={{flex:1, paddingHorizontal: 10, ...FONTS.h5, color: COLORS.darkgray }}
+          >Quantity: {item.quant}</Text>
+          <Text style={{flex:1, paddingHorizontal: 10, textAlign:"right", ...FONTS.h5, color: COLORS.black, fontWeight:"900" }}
+          >Price:{item.price}</Text>
+      </View>      
+      <Text
+        style={{ paddingHorizontal: 10, ...FONTS.h5, color: COLORS.dark }}
+      >Request sent on {item.createdAt.slice(0, 16)}
+      </Text>   
       <View style={{borderWidth:1, marginTop:10, borderColor:COLORS.lightGray}}></View>
     </View>
   );
@@ -176,10 +207,29 @@ const getRejectedItems = (value) =>{
     </View>
      </ScrollView>)
    }
+
+   const Requested =() =>{
+    return (<ScrollView style={{flex:1, backgroundColor:COLORS.white}}>
+       <View style={{ padding: SIZES.padding * 2, height: SIZES.height }}>     
+     {myRequests && (
+       <FlatList
+         data={myRequests}
+         vertical
+         showsVerticalScrollIndicator={false}
+         keyExtractor={(item) => `${item.id}`}
+         renderItem={renderMyInquiries}
+         contentContainerStyle={{}}
+       />
+     )}
+   </View>
+    </ScrollView>)
+  }
+
    const renderScene = SceneMap({
     first:Pending,
     second:Accepted,
-    third:Rejected
+    third:Rejected,
+    fourth:Requested
   })
   return (
     <TabView

@@ -57,8 +57,8 @@ function Signin() {
         onChangeText={setPhoneNumber}
       />
 
-      <TouchableOpacity style={styles.buttonLogin_} onPress={sendVerification}>
-        <Text style={styles.buttonLoginText}>Get OTP </Text>
+      <TouchableOpacity style={styles.buttonLogin} onPress={sendVerification}>
+        <Text style={styles.buttonText}>Get OTP </Text>
       </TouchableOpacity>
       <View style={{ height: 20 }}></View>
       <TextInput
@@ -105,12 +105,15 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: COLORS.white,
-    textAlign: "center",
-    ...FONTS.h5,
+    textAlign: "right",
+    paddingHorizontal:20,
+    ...FONTS.h4,
   },
   input: {
     padding: 10,
     borderRadius: 10,
+    borderWidth:1,
+    borderColor:COLORS.lightGray
   },
   button: {
     padding: 3,

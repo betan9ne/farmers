@@ -21,12 +21,12 @@ const Welcome = ({ navigation }) => {
         Farming should be easy and convenient and thats why we believe this
         platform is the best place for you.
       </Text>
-      {/* </ImageBackground> */}
+      
       <View style={styles.miniContainer}>
         <TouchableOpacity
           style={styles.button1}
           onPress={() => navigation.navigate("Register")}
-        ><Text style={{textAlign:"left"}}>Sign up</Text>
+        ><Text style={{textAlign:"right", color:COLORS.white, ...FONTS.h4}}>Sign up</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -45,29 +45,36 @@ const styles = StyleSheet.create({
     height: SIZES.height,
        alignItems: "center",
     justifyContent: "center",
+    backgroundColor:COLORS.white
   },
   buttonText:{
-    textAlign:"right"
+    textAlign:"right",
+    color:COLORS.white, ...FONTS.h4
   },
   miniContainer: {
     padding: SIZES.padding * 2,
     position: "absolute",
     flexDirection: "row",
+   
     bottom: 0,
     left: 0,
     right: 0,
   },
   button1: {
     flex: 0.5,
-    textAlign: "left",
-    backgroundColor: "rgb(240,240,240)",
-    padding: SIZES.padding * 2,
+    textAlign: "right",
+     padding: SIZES.padding * 2,
+     backgroundColor:COLORS.primary,
+     marginHorizontal:5,
+     borderRadius:10
   },
   button2: {
     flex: 0.5,
     textAlign: "right",
-    backgroundColor: "rgb(240,240,240)",
-    padding: SIZES.padding * 2,
+     padding: SIZES.padding * 2,
+     backgroundColor:COLORS.secondary,
+     marginHorizontal:5,
+     borderRadius:10
   },
   image: {
     marginTop: "20%",
