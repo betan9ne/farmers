@@ -252,14 +252,14 @@ function profile() {
               textAlign: "center",
               fontWeight: "900",
             }}
-          > <Feather name="list" size={24} color="white" />
+          > <Feather name="mail" size={24} color="white" />
             {"\n\n"}Feedback
           </Text>
         </TouchableOpacity>
       </View>
 
       <View style={{ flexDirection: "row", marginVertical: 5 }}>
-        <View
+        <TouchableOpacity  onPress={() => navigation.navigate("about")}
           style={{
             flex: 1,
             marginHorizontal: 5,
@@ -277,9 +277,9 @@ function profile() {
               fontWeight: "900",
             }}
           ><Feather name="info" size={24} color="white" />
-            {"\n\n"}About FStore
+            {"\n\n"}About
           </Text>
-        </View>
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() => logout()}
           style={{

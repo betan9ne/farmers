@@ -20,6 +20,7 @@ import updateProfile from "./comp/profile/UpdateProfile";
 import Inquiries from "./comp/profile/Inquiries";
 import Vendors from "./comp/explore/Vendors";
 import Feedback from "./comp/profile/Feedback";
+import About from "./comp/profile/About";
 
 const Stack = createStackNavigator();
 
@@ -137,6 +138,11 @@ const App = () => {
           name="updateProfile"
           component={updateProfile}
           options={{ headerShown: true, title: "Update Profile" }}
+        />
+           <Stack.Screen
+          name="about"
+          component={About}
+          options={{ headerShown: true, title: "About" }}
         />
         <Stack.Screen
           name="Inquiries"

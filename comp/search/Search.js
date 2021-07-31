@@ -79,12 +79,8 @@ function Search() {
         setSearch(value)
     }
     const renderItem = ({ item }) => (           
-        <TouchableOpacity onPress={()=>searchTags(item.name)} style={{paddingVertical:10,marginHorizontal:5, borderColor:COLORS.lightGray, borderRadius:10, backgroundColor:COLORS.white, borderWidth:0.4}}>
-            <Text style={{paddingHorizontal:20, color:COLORS.dark, ...FONTS.h5}}>{item.name}</Text>
-        </TouchableOpacity>
+        <TouchableOpacity onPress={()=>searchTags(item.name)} style={{paddingVertical:10,marginHorizontal:5, borderColor:COLORS.lightGray, borderRadius:10, backgroundColor:COLORS.white, borderWidth:0.4}}><Text style={{paddingHorizontal:20, color:COLORS.dark, ...FONTS.h5}}>{item.name}</Text></TouchableOpacity>
      )
-
-    
 
     const renderSearchItem = ({ item }) => (           
         <TouchableOpacity  onPress={()=>navigation.navigate("viewProduce",{item})} style={{paddingVertical:10,marginHorizontal:5, marginVertical:5, borderColor:COLORS.lightGray, borderRadius:10, backgroundColor:COLORS.white, borderWidth:0.4}}>
@@ -113,9 +109,7 @@ function Search() {
                 renderItem={renderItem}
                 contentContainerStyle={{                    
                 }}
-            />  }
-           
-    </View>
+            />  }</View>
     <ScrollView style={{backgroundColor:COLORS.white, height:SIZES.height-120, marginBottom:0, paddingBottom:90}}>
             {
               filteredResults &&  filteredResults.length !== 0 ? 
