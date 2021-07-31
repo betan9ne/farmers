@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import {
   StyleSheet,
@@ -11,18 +11,33 @@ import {
 import { COLORS, FONTS, SIZES } from "./../../constants";
 
 const Welcome = ({ navigation }) => {
+  let day = new Date().getDay()
+  const[image, setImage]= React.useState()
+   console.log(day)
+
+   let images = [require(`./../../assets/img0.png`),
+   require(`./../../assets/img1.png`),
+   require(`./../../assets/img2.png`),
+   require(`./../../assets/img3.png`),
+   require(`./../../assets/img4.png`),
+   require(`./../../assets/img5.png`),
+   require(`./../../assets/img6.png`)]
+
   return (
     <View style={styles.container}>
-      {/* <ImageBackground source={image} style={styles.bgimage}> */}
-      <Image source={require("./../../assets/img.png")} style={styles.image} />
-      <Text style={styles.txth1}>Welcome!</Text>
+     <ImageBackground source={images[day]} resizeMode="cover" style={{flex:1, justifyContent:"center"}}>
+      <View style={{ 
+     position:"absolute", backgroundColor:COLORS.white, bottom:-10, padding:SIZES.padding*2, borderRadius:10, left:0, right:0 
+   }}>
+
+<Text style={styles.txth1}>Welcome{"\n"} to Farms Market</Text>
       <Text style={styles.txth2}>
         {" "}
         Farming should be easy and convenient and thats why we believe this
         platform is the best place for you.
       </Text>
-      
-      <View style={styles.miniContainer}>
+
+     <View style={{flexDirection: "row",}}>
         <TouchableOpacity
           style={styles.button1}
           onPress={() => navigation.navigate("Register")}
@@ -35,17 +50,16 @@ const Welcome = ({ navigation }) => {
         ><Text style={styles.buttonText}>Log in</Text>
         </TouchableOpacity>
       </View>
+      </View>
+      </ImageBackground>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: SIZES.width,
-    height: SIZES.height,
-       alignItems: "center",
-    justifyContent: "center",
-    backgroundColor:COLORS.white
+  container: { 
+    flex:1,
+  marginBottom:30
   },
   buttonText:{
     textAlign:"right",
@@ -53,19 +67,14 @@ const styles = StyleSheet.create({
   },
   miniContainer: {
     padding: SIZES.padding * 2,
-    position: "absolute",
-    flexDirection: "row",
    
-    bottom: 0,
-    left: 0,
-    right: 0,
   },
   button1: {
     flex: 0.5,
     textAlign: "right",
      padding: SIZES.padding * 2,
      backgroundColor:COLORS.primary,
-     marginHorizontal:5,
+    
      borderRadius:10
   },
   button2: {
@@ -88,10 +97,7 @@ const styles = StyleSheet.create({
   },
   txth2: {
     ...FONTS.h5,
-    width: "60%",
-    textAlign: "center",
-    marginBottom: "30%",
-    marginTop: "5%",
+    marginVertical:20,       
   },
   bgimage: {},
 });

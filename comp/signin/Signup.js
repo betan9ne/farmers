@@ -1,15 +1,17 @@
 import React, {useState, useRef } from 'react';
-import { Alert, SafeAreaView, TextInput, StyleSheet, Text, ScrollView, View, TouchableOpacity } from 'react-native';
+import { Alert, FlatList, TextInput, StyleSheet, Text, ScrollView, View, TouchableOpacity } from 'react-native';
 import { SIZES, COLORS, FONTS } from '../../constants';
 import {FirebaseRecaptchaVerifierModal} from 'expo-firebase-recaptcha'
 import firebase from './../../firebase'
- 
+import locations from '../explore/locations'
+
  const Signup = ({navigation}) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const recaptchaVerifire = useRef(null);
   const [verificationId, setVerificationId] = useState(null);
   const [code, setCode] = useState("");
-  
+  let genderTypes = ["Male", "Female"]
+  let userType = ["Buyer", "Seller", "Shop", "Transporter"]
   
   const [username, setusername] = useState("");
   const [name, setname] = useState("");
@@ -17,8 +19,13 @@ import firebase from './../../firebase'
   const [district, setdistrict] = useState("");
   const [province, setprovince] = useState("");
   const [usertype, setusertype] = useState("");
-
+  const[districts, setDistricts] = useState([])
   // function to request for a verification code
+
+  const getDistricts = (item) =>{
+    setDistricts(item.districts)
+    setprovince(item.province)
+}
 
   const sendVerification = () => {
     const phoneProvider = new firebase.auth.PhoneAuthProvider();
@@ -53,6 +60,31 @@ import firebase from './../../firebase'
       });
   };
 
+  const renderGender = ({ item }) => (             
+    <TouchableOpacity onPress={()=>setgender(item)} style={{paddingVertical:10,marginHorizontal:5, borderRadius:10,
+     backgroundColor:gender === item ? COLORS.secondary : COLORS.black}}>
+      <Text style={{paddingHorizontal:20, color:COLORS.white, ...FONTS.h5}}>{item}</Text></TouchableOpacity>
+    )
+  
+    const renderType = ({ item }) => (             
+      <TouchableOpacity onPress={()=>setusertype(item)} style={{paddingVertical:10,marginHorizontal:5, borderRadius:10,
+       backgroundColor:usertype === item ? COLORS.secondary : COLORS.black}}>
+        <Text style={{paddingHorizontal:20, color:COLORS.white, ...FONTS.h5}}>{item}</Text></TouchableOpacity>
+      )
+
+      const renderItem = ({ item }) => (             
+        <TouchableOpacity onPress={()=>getDistricts(item)} style={{paddingVertical:10,marginHorizontal:5, borderRadius:10, 
+          backgroundColor:province === item.province ? COLORS.secondary : COLORS.black}}>
+          <Text style={{paddingHorizontal:20, color:COLORS.white, ...FONTS.h5}}>{item.province}</Text></TouchableOpacity>
+        )
+        
+        const renderDistricts = ({item})=>{       
+          return(
+          <TouchableOpacity onPress={()=>setdistrict(item)} style={{paddingVertical:10,marginHorizontal:5, borderRadius:10, 
+          backgroundColor:district === item ? COLORS.secondary : COLORS.black}}>
+            <Text style={{paddingHorizontal:20, color:COLORS.white, ...FONTS.h5}}>{item}</Text></TouchableOpacity>
+          )  
+        }
 
   return (
     <ScrollView style={{backgroundColor:COLORS.white, padding:SIZES.padding*3, flex:1}}>  
@@ -60,8 +92,15 @@ import firebase from './../../firebase'
         ref={recaptchaVerifire}
         firebaseConfig={firebase.app().options}
         attemptInvisibleVerification={false} />  
-        <Text style={{...FONTS.h2, marginBottom:30}}>Register to get Started</Text>
-      <View style={styles.miniContainer}>
+       <View style={styles.miniContainer}>
+       <Text style={styles.label}>Full Name</Text>
+        <TextInput
+          keyboardType="default"
+          placeholder="*Idah Chama"
+          placeholderTextColor="rgb(135, 135, 135)"
+          style={styles.input}
+          onChangeText={setname}
+        />
         <Text style={styles.label}>Username</Text>
         <TextInput
           keyboardType="default"
@@ -72,59 +111,61 @@ import firebase from './../../firebase'
           style={styles.input}
           onChangeText={setusername}
         />
-
-        <Text style={styles.label}>Full Name</Text>
-        <TextInput
-          keyboardType="default"
-          placeholder="*Idah Chama"
-          placeholderTextColor="rgb(135, 135, 135)"
-          style={styles.input}
-          onChangeText={setname}
-        />
-
+ 
         <Text style={styles.label}>Gender</Text>
-        <TextInput
-          keyboardType="default"
-          placeholder="Male / Female"
-          placeholderTextColor="rgb(135, 135, 135)"
-          style={styles.input}
-          onChangeText={setgender}
-        />
+        <FlatList
+            data={genderTypes}
+            horizontal
+            showsHorizontalScrollIndicator={false}               
+                keyExtractor={item => `${item}`}
+                renderItem={renderGender}
+                contentContainerStyle={{                    
+                }}
+            />  
+      
       </View>
 
       <View style={styles.miniContainer}>
+      <Text style={styles.label}>Province</Text>
+        {locations &&  <FlatList
+            data={locations}
+            horizontal
+            showsHorizontalScrollIndicator={false}               
+                keyExtractor={item => `${item.province}`}
+                renderItem={renderItem}
+                contentContainerStyle={{                    
+                }}
+            />  }
         <Text style={styles.label}>District</Text>
-        <TextInput
-          keyboardType="default"
-          placeholder="Kabwata"
-          placeholderTextColor="rgb(135, 135, 135)"
-          style={styles.input}
-          onChangeText={setdistrict}
-        />
+        {districts ?  <FlatList
+            data={districts}
+            horizontal
+            showsHorizontalScrollIndicator={false}               
+                keyExtractor={item => `${item}`}
+                renderItem={renderDistricts}
+                contentContainerStyle={{                    
+                }}
+            /> : <Text>Select a province to view districts</Text> }
 
-        <Text style={styles.label}>Province</Text>
-        <TextInput
-          keyboardType="default"
-          placeholder="Lusaka"
-          placeholderTextColor="rgb(135, 135, 135)"
-          style={styles.input}
-          onChangeText={setprovince}
-        />
+       
+      
       </View>
 
         <Text style={styles.label}>User Type</Text>
-        <TextInput
-          keyboardType="default"
-          placeholder="Buyer / Seller"
-          placeholderTextColor="rgb(135, 135, 135)"
-          style={styles.input}
-          onChangeText={setusertype}
-        />
+        <FlatList
+            data={userType}
+            horizontal
+            showsHorizontalScrollIndicator={false}               
+                keyExtractor={item => `${item}`}
+                renderItem={renderType}
+                contentContainerStyle={{                    
+                }}
+            />  
 
         <Text style={styles.label}>Phone</Text>
         <TextInput
-          keyboardType="default"
-          placeholder="+260 97X XXX XXX"
+          keyboardType="phone-pad"
+          placeholder="097X XXX XXX"
           placeholderTextColor="rgb(135, 135, 135)"
           autoCompleteType="tel"
           style={styles.input}
@@ -162,7 +203,8 @@ const styles = StyleSheet.create({
 }, 
  input:{
     paddingVertical:10, 
-    paddingHorizontal:20
+    paddingHorizontal:20,
+    borderWidth:1, borderColor:COLORS.lightGray
  },
  label:{
      ...FONTS.h5,

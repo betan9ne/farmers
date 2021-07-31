@@ -234,6 +234,7 @@ const getRejectedItems = (value) =>{
   return (
     <TabView
     renderTabBar={props=> <TabBar{...props}
+    scrollEnabled={true}
     renderLabel={({ route, focused, color }) => (
       <Text style={{ color:COLORS.black, margin: 8 }}>
         {route.title}

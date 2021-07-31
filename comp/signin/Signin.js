@@ -46,7 +46,7 @@ function Signin() {
         attemptInvisibleVerification={false}
       />
       <Text style={styles.titleText2}>Welcome back,</Text>
-      <Text style={styles.titleText}>Enter number to continue</Text>
+      <Text style={styles.titleText}>Enter your phone number to continue</Text>
       <TextInput
         // value="Phone Number"
         keyboardType="number-pad"
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   },
   titleText2: {
     marginBottom: 80,
-    fontSize: 22,
+    ...FONTS.h1,
     color: "black",
   },
   buttonText: {

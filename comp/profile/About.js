@@ -4,7 +4,7 @@ import { SIZES, FONTS, COLORS } from "../../constants"
 
 function About() {
     return (
-        <View style={{backgroundCOlor:COLORS.white, padding:SIZES.padding*2}}>
+        <View style={{backgroundColor:COLORS.white, flex:1, padding:SIZES.padding*2}}>
             <Text style={{...FONTS.h2, textAlign:"center"}}>
                 Version 0.0.0.1
                 {"\n\n"}
