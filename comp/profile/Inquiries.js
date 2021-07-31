@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import firebase from "../..//firebase";
 import useGetInquiries from "../crud/useGetInquiries";
 import {TabView, TabBar, SceneMap} from 'react-native-tab-view'
+import { ScrollView } from "react-native-gesture-handler";
 
 function Inquiries() {
   const navigation = useNavigation();
@@ -94,17 +95,17 @@ const getRejectedItems = (value) =>{
         backgroundColor: COLORS.white,
       }}
     ><Text
-        style={{ paddingHorizontal: 20, ...FONTS.h4, color: COLORS.secondary }}
+        style={{ paddingHorizontal: 10, ...FONTS.h4, color: COLORS.secondary }}
       >{item.produce}
       </Text>
       <View style={{flexDirection:"row"}}>
-          <Text style={{flex:1, paddingHorizontal: 20, ...FONTS.h5, color: COLORS.darkgray }}
+          <Text style={{flex:1, paddingHorizontal: 10, ...FONTS.h5, color: COLORS.darkgray }}
           >Quantity: {item.quant}</Text>
-          <Text style={{flex:1, paddingHorizontal: 20, ...FONTS.h5, color: COLORS.darkgray }}
+          <Text style={{flex:1, paddingHorizontal: 10, textAlign:"right", ...FONTS.h5, color: COLORS.black, fontWeight:"900" }}
           >Price:{item.price}</Text>
       </View>      
       <Text
-        style={{ paddingHorizontal: 20, ...FONTS.h5, color: COLORS.darkgray }}
+        style={{ paddingHorizontal: 10, ...FONTS.h5, color: COLORS.dark }}
       >Request sent on {item.createdAt.slice(0, 16)}
       </Text>
      
@@ -123,7 +124,7 @@ const getRejectedItems = (value) =>{
   );
 
   const Pending =() =>{
-    return(<View style={{flex:1, backgroundColor:COLORS.white}}>
+    return(<ScrollView style={{flex:1, backgroundColor:COLORS.white}}>
           <View style={{ padding: SIZES.padding * 2, height: SIZES.height }}>
       <Text style={{ ...FONTS.h5, marginVertical: 10 }}>
         You can accept or deny your incoming requests from here
@@ -139,11 +140,11 @@ const getRejectedItems = (value) =>{
         />
       )}
     </View>
-    </View>)
+    </ScrollView>)
    }
    
    const Rejected =() =>{
-    return(<View style={{flex:1, backgroundColor:COLORS.white}}>
+    return(<ScrollView style={{flex:1, backgroundColor:COLORS.white}}>
           <View style={{ padding: SIZES.padding * 2, height: SIZES.height }}>      
       {rejected && (
         <FlatList
@@ -156,11 +157,11 @@ const getRejectedItems = (value) =>{
         />
       )}
     </View>
-    </View>)
+    </ScrollView>)
    }
 
    const Accepted =() =>{
-     return (<View style={{flex:1, backgroundColor:COLORS.white}}>
+     return (<ScrollView style={{flex:1, backgroundColor:COLORS.white}}>
         <View style={{ padding: SIZES.padding * 2, height: SIZES.height }}>     
       {accepted && (
         <FlatList
@@ -173,7 +174,7 @@ const getRejectedItems = (value) =>{
         />
       )}
     </View>
-     </View>)
+     </ScrollView>)
    }
    const renderScene = SceneMap({
     first:Pending,
