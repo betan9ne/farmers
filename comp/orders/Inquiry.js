@@ -18,6 +18,7 @@ const Inquiry = ({ route }) => {
       price: data.price,
       produce: data.produce,
       quant: bags,
+      status:0,
       seller: data.u_id,
     };
     firebase

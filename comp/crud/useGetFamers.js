@@ -1,7 +1,7 @@
 import React from 'react'
 import firebase from '../..//firebase'
 
-const useGetFarmers  =(id) => {
+const useGetFarmers  =() => {
     const[docs, setDocs] = React.useState([])
 
     React.useEffect(() => { 

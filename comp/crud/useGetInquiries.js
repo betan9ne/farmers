@@ -1,12 +1,11 @@
 import React from "react";
 import firebase from "../..//firebase";
 
-const useGetInquiries = (id) => {
+const useGetInquiries = () => {
   const [docs, setDocs] = React.useState([]);
 
   let user = firebase.auth().currentUser.uid;
-  console.log(user);
-
+ 
   React.useEffect(() => {
     firebase
       .firestore()
