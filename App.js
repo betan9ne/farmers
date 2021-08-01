@@ -18,6 +18,7 @@ import EditProduct from "./comp/profile/EditProduct";
 import { View, Text } from "react-native";
 import updateProfile from "./comp/profile/UpdateProfile";
 import Inquiries from "./comp/profile/Inquiries";
+import feedback from "./comp/profile/feedback";
 
 const Stack = createStackNavigator();
 
@@ -135,6 +136,11 @@ const App = () => {
           name="viewProduce"
           component={ViewProduce}
           options={{ headerShown: true, title: "Produce Details" }}
+        />
+        <Stack.Screen
+          name="feedback"
+          component={feedback}
+          options={{ headerShown: true, title: "Feedback" }}
         />
       </Stack.Navigator>
     </NavigationContainer>

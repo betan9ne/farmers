@@ -260,7 +260,7 @@ function profile() {
           </Text>
         </View>
         <TouchableOpacity
-          onPress={() => logout()}
+          onPress={() => navigation.navigate("feedback", { user })}
           style={{
             flex: 1,
             marginHorizontal: 5,
@@ -279,11 +279,35 @@ function profile() {
               fontWeight: "900",
             }}
           >
-            <Feather name="log-out" size={24} color="white" />
-            {"\n\n"}Logout
+            <Feather name="mail" size={24} color="white" />
+            {"\n\n"}Feedback
           </Text>
         </TouchableOpacity>
       </View>
+      <TouchableOpacity
+        onPress={() => logout()}
+        style={{
+          flex: 1,
+          marginHorizontal: 5,
+          borderRadius: 10,
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: COLORS.dark,
+        }}
+      >
+        <Text
+          style={{
+            color: COLORS.white,
+            ...FONTS.h4,
+            padding: SIZES.padding * 4,
+            textAlign: "center",
+            fontWeight: "900",
+          }}
+        >
+          <Feather name="log-out" size={24} color="white" />
+          {"\n\n"}Logout
+        </Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }
