@@ -146,9 +146,6 @@ import locations from '../explore/locations'
                 contentContainerStyle={{                    
                 }}
             /> : <Text>Select a province to view districts</Text> }
-
-       
-      
       </View>
 
         <Text style={styles.label}>User Type</Text>

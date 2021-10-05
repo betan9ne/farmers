@@ -30,7 +30,7 @@ const Welcome = ({ navigation }) => {
      position:"absolute", backgroundColor:COLORS.white, bottom:-10, padding:SIZES.padding*2, borderRadius:10, left:0, right:0 
    }}>
 
-<Text style={styles.txth1}>Welcome{"\n"} to Farms Market</Text>
+<Text style={styles.txth1}>Welcome{"\n"} to Farmers' Market</Text>
       <Text style={styles.txth2}>
         {" "}
         Farming should be easy and convenient and thats why we believe this

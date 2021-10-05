@@ -1,0 +1,3 @@
+//react-native-webview react-native-tab-view @react-native-seoul/masonry-list @react-navigation/bottom-tabs @react-navigation/native @react-navigation/stack firebase react-native-gesture-handler react-native-pager-view react-native-screens
+
+//expo-firebase-recaptcha expo-font expo-notifications
